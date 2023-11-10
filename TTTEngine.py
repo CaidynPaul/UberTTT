@@ -1,7 +1,7 @@
 #counter and symbol have been used interchangably in the comments
 
 
-class board:#board class
+class Board:#board class
 	def __init__(self):
 		self.board=[[' ',' ',' '],
 					[' ',' ',' '],
@@ -55,7 +55,7 @@ class board:#board class
 			
 	
 
-class player:#holds the player symbol only
+class Player:#holds the player symbol only
 	def __init__(self,symbol,name):
 		self.symbol=symbol
 		self.name=name#just for back end
@@ -65,9 +65,9 @@ class player:#holds the player symbol only
 
 
 #concept driver code
-player1=player('o','player1')
-player2=player('x','player2')
-game=board()
+player1=Player('o','player1')
+player2=Player('x','player2')
+game=Board()
 while True:
 	
 	game.display_board()
