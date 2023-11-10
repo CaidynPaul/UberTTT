@@ -29,9 +29,13 @@ def gameScreenPlayer():
 		for i in range(len(board)):
 			for q in range(len(board[i])):
 				if board[i][q] == "x":
+					pygame.draw.rect(SCREEN,('#ff1111'),[iXRect.x+(64+margin)*q+offsetx,iXRect.y+(64+margin)*i+offsety,64,64])
 					SCREEN.blit(iX,(iXRect.x+(64+margin)*q+offsetx,iXRect.y+(64+margin)*i+offsety))
+					
 				if board[i][q] == "o":
+					pygame.draw.rect(SCREEN,('#ff1111'),[iXRect.x+(64+margin)*q+offsetx,iXRect.y+(64+margin)*i+offsety,64,64])
 					SCREEN.blit(iO,(iORect.x+(64+margin)*q+offsetx,iORect.y+(64+margin)*i+offsety))
+					
 				if board[i][q] == " ":
 					pass
 
@@ -43,6 +47,45 @@ def gameScreenPlayer():
 		for e in pygame.event.get():
 			if e.type == pygame.QUIT:
 				running = False
+			
+			if e.type == pygame.MOUSEBUTTONDOWN:
+				mx,my = pygame.mouse.get_pos()
+				# First Row
+				if mx >= 284 and mx <= 284+64:
+					if my >= 80 and my <= 80+64:
+						print("1")
+				
+				if mx >= 284+64+20 and mx <= 284+64+64+20:
+					if my >= 80 and my <= 80+64:
+						print("2")
+				
+				if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
+					if my >= 80 and my <= 80+64:
+						print("3")
+				# Second Row
+				if mx >= 284 and mx <= 284+64:
+					if my >= 80+64+20 and my <= 80+64+64+20:
+						print("4")
+				
+				if mx >= 284+64+20 and mx <= 284+64+64+20:
+					if my >= 80+64+20 and my <= 80+64+64+20:
+						print("5")
+				
+				if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
+					if my >= 80+64+20 and my <= 80+64+64+20:
+						print("6")
+				# Third Row
+				if mx >= 284 and mx <= 284+64:
+					if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
+						print("7")
+				
+				if mx >= 284+64+20 and mx <= 284+64+64+20:
+					if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
+						print("8")
+				
+				if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
+					if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
+						print("9")
 				
 		pygame.display.flip()
 
@@ -87,6 +130,45 @@ def gameScreenAi():
 		for e in pygame.event.get():
 			if e.type == pygame.QUIT:
 				running = False
+
+			if e.type == pygame.MOUSEBUTTONDOWN:
+				mx,my = pygame.mouse.get_pos()
+				# First Row
+				if mx >= 284 and mx <= 284+64:
+					if my >= 80 and my <= 80+64:
+						print("1")
+				
+				if mx >= 284+64+20 and mx <= 284+64+64+20:
+					if my >= 80 and my <= 80+64:
+						print("2")
+				
+				if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
+					if my >= 80 and my <= 80+64:
+						print("3")
+				# Second Row
+				if mx >= 284 and mx <= 284+64:
+					if my >= 80+64+20 and my <= 80+64+64+20:
+						print("4")
+				
+				if mx >= 284+64+20 and mx <= 284+64+64+20:
+					if my >= 80+64+20 and my <= 80+64+64+20:
+						print("5")
+				
+				if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
+					if my >= 80+64+20 and my <= 80+64+64+20:
+						print("6")
+				# Third Row
+				if mx >= 284 and mx <= 284+64:
+					if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
+						print("7")
+				
+				if mx >= 284+64+20 and mx <= 284+64+64+20:
+					if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
+						print("8")
+				
+				if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
+					if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
+						print("9")
 				
 		pygame.display.flip()
 
