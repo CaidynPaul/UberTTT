@@ -14,7 +14,7 @@ def gameScreen():
 	iXRect = iX.get_rect()
 	iORect = iO.get_rect()
 
-	board = [['o','x','o'],['x','x','o'],['o','o','o']]
+	board = [['o','o','o'],['x','x','x'],['x','x','o']]
 
 	def display_board(board):
 		for i in range(len(board)):
@@ -29,7 +29,7 @@ def gameScreen():
 	running = True
 
 	while running:
-		SCREEN.fill(('#e5e5e5'))
+		SCREEN.fill(('#1a1a1a'))
 		display_board(board)
 		for e in pygame.event.get():
 			if e.type == pygame.QUIT:
