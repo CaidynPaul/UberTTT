@@ -240,6 +240,46 @@ def titleScreen():
 		pygame.draw.rect(SCREEN,('#772C1F'),[SCREEN_RECT.centerx-(256//2),SCREEN_RECT.centery-128,256,80])
 		SCREEN.blit(play_text,[SCREEN_RECT.centerx-50,SCREEN_RECT.centery-130])
 		pygame.display.flip()
+
+def winScreen():
+	SCREEN = pygame.display.set_mode((1280,720))
+	SCREEN_RECT = SCREEN.get_rect()
+
+	
+	win_background = pygame.image.load("win-Background.png")
+
+	def get_winner():
+		pass
+
+	font_size = 110
+	win_font = pygame.font.SysFont("Consolas",font_size)
+
+	winner = "Player 1"
+	win_text = win_font.render(winner,True,('#fcc603'))
+
+	home_image = pygame.image.load("Home.png")
+
+	pygame.display.set_caption(f"Winner : {winner}")
+
+	running = True
+	while running:
+		SCREEN.blit(win_background, SCREEN_RECT)
+		SCREEN.blit(win_text,(SCREEN_RECT.centerx-230,SCREEN_RECT.centery+160))
+		pygame.draw.rect(SCREEN,('#4b0ebe'),[SCREEN_RECT.width-64,SCREEN_RECT.height-64,64,64])
+		SCREEN.blit(home_image,(SCREEN_RECT.width-64,SCREEN_RECT.height-64))		
+		for e in pygame.event.get():
+			if e.type == pygame.QUIT:
+				running = False
+			
+			if e.type == pygame.MOUSEBUTTONUP:
+				mx,my = pygame.mouse.get_pos()
+
+				if mx in range(SCREEN_RECT.width-64,SCREEN_RECT.width) and my in range(SCREEN_RECT.height-64,SCREEN_RECT.height):
+					titleScreen()
+					exit()
+		
+		pygame.display.flip()
+
 if __name__ == '__main__':
 	titleScreen()
 

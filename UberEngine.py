@@ -18,7 +18,7 @@ class Board:#board class
 		if counter=='o':
 			winner='Player 1'
 		else:
-			winner='player 2'
+			winner='Player 2'
 		print('You win',winner,'You were playing as',counter)
 		quit()
 	
