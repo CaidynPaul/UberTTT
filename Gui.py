@@ -23,17 +23,17 @@ def gameScreenPlayer():
 	offsetx = SCREEN_RECT.centerx-96-margin
 	offsety = SCREEN_RECT.centery-300-margin
 
-	board = [['o','o','o'],['x','x','x'],['x','x','o']]
+	board = [['x',' ',' o'],['o','x',' '],[' ','o','x']]
 
 	def display_board(board):
 		for i in range(len(board)):
 			for q in range(len(board[i])):
 				if board[i][q] == "x":
-					pygame.draw.rect(SCREEN,('#ff1111'),[iXRect.x+(64+margin)*q+offsetx,iXRect.y+(64+margin)*i+offsety,64,64])
+					
 					SCREEN.blit(iX,(iXRect.x+(64+margin)*q+offsetx,iXRect.y+(64+margin)*i+offsety))
 					
 				if board[i][q] == "o":
-					pygame.draw.rect(SCREEN,('#ff1111'),[iXRect.x+(64+margin)*q+offsetx,iXRect.y+(64+margin)*i+offsety,64,64])
+					
 					SCREEN.blit(iO,(iORect.x+(64+margin)*q+offsetx,iORect.y+(64+margin)*i+offsety))
 					
 				if board[i][q] == " ":
@@ -281,5 +281,5 @@ def winScreen():
 		pygame.display.flip()
 
 if __name__ == '__main__':
-	winScreen()
+	titleScreen()
 
