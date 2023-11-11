@@ -8,7 +8,7 @@ A collaborative project of tictactoe
 # About
 
 This project includes a fully functioning GUI and a AI system.
-This project is <u>HW.
+This project is __HW__.
 
 # Other Projects
 [Jukebox](https://github.com/CaidynPaul/PyJukeBox)
