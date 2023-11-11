@@ -9,3 +9,8 @@ A collaborative project of tictactoe
 
 This project includes a fully functioning GUI and a AI system.
 This project is <u>HW.
+
+# Other Projects
+[Jukebox](https://github.com/CaidynPaul/PyJukeBox)
+
+[Music.py](https://github.com/CaidynPaul/music.py)
