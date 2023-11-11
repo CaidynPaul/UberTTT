@@ -23,21 +23,24 @@ def gameScreenPlayer():
 	offsetx = SCREEN_RECT.centerx-96-margin
 	offsety = SCREEN_RECT.centery-300-margin
 
-	board = [['x',' ',' o'],['o','x',' '],[' ','o','x']]
+	board = [[' ',' ',' '],[' ',' ',' '],[' ',' ',' ']]
 
 	def display_board(board):
 		for i in range(len(board)):
 			for q in range(len(board[i])):
-				if board[i][q] == "x":
-					
+				if board[i][q] == "x":					
 					SCREEN.blit(iX,(iXRect.x+(64+margin)*q+offsetx,iXRect.y+(64+margin)*i+offsety))
 					
-				if board[i][q] == "o":
-					
+				if board[i][q] == "o":					
 					SCREEN.blit(iO,(iORect.x+(64+margin)*q+offsetx,iORect.y+(64+margin)*i+offsety))
 					
 				if board[i][q] == " ":
 					pass
+		# Draw guide lines for the board
+		pygame.draw.line(SCREEN,('#e4e4e4'),(360,80),(360,315)) # Verticle
+		pygame.draw.line(SCREEN,('#e4e4e4'),(360+10+64+10,80),(360+10+64+10,315)) #Verticle
+		pygame.draw.line(SCREEN,('#e4e4e4'),(270,150),(530,150)) # Horizontal
+		pygame.draw.line(SCREEN,('#e4e4e4'),(260,150+10+64+10),(530,150+10+64+10)) # Horizontal
 
 	running = True
 
@@ -110,7 +113,7 @@ def gameScreenAi():
 	offsetx = SCREEN_RECT.centerx-96-margin
 	offsety = SCREEN_RECT.centery-300-margin
 
-	board = [['o','o','o'],['x','x','x'],['x','x','o']]
+	board = [[' ',' ',' '],[' ',' ',' '],[' ',' ',' ']]
 
 	def display_board(board):
 		for i in range(len(board)):
@@ -121,6 +124,11 @@ def gameScreenAi():
 					SCREEN.blit(iO,(iORect.x+(64+margin)*q+offsetx,iORect.y+(64+margin)*i+offsety))
 				if board[i][q] == " ":
 					pass
+		# Draw guide lines for the board
+		pygame.draw.line(SCREEN,('#e4e4e4'),(360,80),(360,315)) # Verticle
+		pygame.draw.line(SCREEN,('#e4e4e4'),(360+10+64+10,80),(360+10+64+10,315)) #Verticle
+		pygame.draw.line(SCREEN,('#e4e4e4'),(270,150),(530,150)) # Horizontal
+		pygame.draw.line(SCREEN,('#e4e4e4'),(260,150+10+64+10),(530,150+10+64+10)) # Horizontal
 
 	running = True
 
@@ -177,7 +185,7 @@ def titleChoice():
 	SCREEN = pygame.display.set_mode((1280,720))
 	SCREEN_RECT = SCREEN.get_rect()
 
-	pygame.display.set_caption("UberSuper TicTacToe")
+	pygame.display.set_caption("Made by Caidyn And Yusuf")
 	
 	running = True
 	
@@ -217,6 +225,8 @@ def titleScreen():
 	SCREEN = pygame.display.set_mode((1280,720))
 	SCREEN_RECT = SCREEN.get_rect()
 	
+	pygame.display.set_caption("UberSuper TicTacToe")
+
 	running = True
 	
 	play_font = pygame.font.SysFont("Arial",64)
