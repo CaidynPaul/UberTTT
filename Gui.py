@@ -281,5 +281,5 @@ def winScreen():
 		pygame.display.flip()
 
 if __name__ == '__main__':
-	titleScreen()
+	winScreen()
 
