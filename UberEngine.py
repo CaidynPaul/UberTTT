@@ -1,5 +1,5 @@
 #counter and symbol have been used interchangably in the comments
-#HI
+
 
 
 class Board:#board class
