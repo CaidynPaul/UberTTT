@@ -10,9 +10,8 @@ class Board:#board class
 						4:[1,0],5:[1,1],6:[1,2],#used in "convert_to_index"
 						7:[2,0],8:[2,1],9:[2,2]}#function
 		
-	def display_board(self):#just for backend testing
-		for i in self.board:
-			print(i)
+	def get_board(self):#just for backend testing
+		return self.board
 			
 	def win(self,counter):#backend testing
 		if counter=='o':
@@ -27,7 +26,10 @@ class Board:#board class
 										#gives in the form [y,x], due to array calling
 	
 	def add_counter(self,player_counter,xcoord,ycoord):#adds counter
-		self.board[ycoord][xcoord]=player_counter
+		if self.board[ycoord][xcoord] == ' ':
+			self.board[ycoord][xcoord]=player_counter
+		else:
+			pass
 	
 	def check_for_win(self,counter):#counter being the symbol we are checking for
 		#just alot of if/elif statments to check all possible win conditions for a specific counter
@@ -59,29 +61,30 @@ class Player:#holds the player symbol only
 	def __init__(self,symbol,name):
 		self.symbol=symbol
 		self.name=name#just for back end
-
-
-
-
-
-#concept driver code
-player1=Player('o','player1')
-player2=Player('x','player2')
-game=Board()
-while True:
 	
-	game.display_board()
-	print('Player 1 where would you like to go?')
-	place=int(input('---->'))
-	game.add_counter(player1.symbol,game.convert_to_index(place)[1],game.convert_to_index(place)[0])
-	if game.check_for_win(player1.symbol):
-		game.win(player1.symbol)
+
+
+
+
+
+# #concept driver code
+# player1=Player('o','player1')
+# player2=Player('x','player2')
+# game=Board()
+# while True:
 	
-	game.display_board()
-	print('Player 2 where would you like to go?')
-	place=int(input('---->'))
-	game.add_counter(player2.symbol,game.convert_to_index(place)[1],game.convert_to_index(place)[0])
-	game.check_for_win(player2.symbol)
-	if game.check_for_win(player2.symbol):
-		game.win(player2.symbol)	
+# 	game.display_board()
+# 	print('Player 1 where would you like to go?')
+# 	place=int(input('---->'))
+# 	game.add_counter(player1.symbol,game.convert_to_index(place)[1],game.convert_to_index(place)[0])
+# 	if game.check_for_win(player1.symbol):
+# 		game.win(player1.symbol)
+	
+# 	game.display_board()
+# 	print('Player 2 where would you like to go?')
+# 	place=int(input('---->'))
+# 	game.add_counter(player2.symbol,game.convert_to_index(place)[1],game.convert_to_index(place)[0])
+# 	game.check_for_win(player2.symbol)
+# 	if game.check_for_win(player2.symbol):
+# 		game.win(player2.symbol)	
 	

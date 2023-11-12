@@ -1,5 +1,5 @@
 import pygame
-# import TTTEngine as Engine
+import UberEngine as Engine
 
 pygame.init()
 def gameScreenPlayer():
@@ -23,7 +23,7 @@ def gameScreenPlayer():
 	offsetx = SCREEN_RECT.centerx-96-margin
 	offsety = SCREEN_RECT.centery-300-margin
 
-	board = [[' ',' ',' '],[' ',' ',' '],[' ',' ',' ']]
+	oboard = Engine.Board()	
 
 	def display_board(board):
 		for i in range(len(board)):
@@ -43,53 +43,118 @@ def gameScreenPlayer():
 		pygame.draw.line(SCREEN,('#e4e4e4'),(260,150+10+64+10),(530,150+10+64+10)) # Horizontal
 
 	running = True
-
+	turn = 0
+	turnDict = {
+		0:"o",
+		1:"x"
+	}
 	while running:
+		
+		board = oboard.get_board()
 		SCREEN.fill(('#1a1a1a'))
 		display_board(board)
+		print(turn)
 		for e in pygame.event.get():
 			if e.type == pygame.QUIT:
 				running = False
 			
 			if e.type == pygame.MOUSEBUTTONDOWN:
+				
+				turn = 1 - turn
+				
 				mx,my = pygame.mouse.get_pos()
-				# First Row
-				if mx >= 284 and mx <= 284+64:
-					if my >= 80 and my <= 80+64:
-						print("1")
-				
-				if mx >= 284+64+20 and mx <= 284+64+64+20:
-					if my >= 80 and my <= 80+64:
-						print("2")
-				
-				if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
-					if my >= 80 and my <= 80+64:
-						print("3")
-				# Second Row
-				if mx >= 284 and mx <= 284+64:
-					if my >= 80+64+20 and my <= 80+64+64+20:
-						print("4")
-				
-				if mx >= 284+64+20 and mx <= 284+64+64+20:
-					if my >= 80+64+20 and my <= 80+64+64+20:
-						print("5")
-				
-				if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
-					if my >= 80+64+20 and my <= 80+64+64+20:
-						print("6")
-				# Third Row
-				if mx >= 284 and mx <= 284+64:
-					if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
-						print("7")
-				
-				if mx >= 284+64+20 and mx <= 284+64+64+20:
-					if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
-						print("8")
-				
-				if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
-					if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
-						print("9")
-				
+				player_symbol = turnDict[turn]
+				if turn == 0:
+					if mx >= 284 and mx <= 284+64:
+						if my >= 80 and my <= 80+64:
+							oboard.add_counter(player_symbol,0,0)
+							
+					if mx >= 284+64+20 and mx <= 284+64+64+20:
+						if my >= 80 and my <= 80+64:
+							oboard.add_counter(player_symbol,1,0)
+							
+					
+					if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
+						if my >= 80 and my <= 80+64:
+							oboard.add_counter(player_symbol,2,0)
+							
+					# Second Row
+					if mx >= 284 and mx <= 284+64:
+						if my >= 80+64+20 and my <= 80+64+64+20:
+							oboard.add_counter(player_symbol,0,1)
+							
+					
+					if mx >= 284+64+20 and mx <= 284+64+64+20:
+						if my >= 80+64+20 and my <= 80+64+64+20:
+							oboard.add_counter(player_symbol,1,1)
+							
+					
+					if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
+						if my >= 80+64+20 and my <= 80+64+64+20:
+							oboard.add_counter(player_symbol,2,1)
+							
+					# Third Row
+					if mx >= 284 and mx <= 284+64:
+						if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
+							oboard.add_counter(player_symbol,0,2)
+							
+					
+					if mx >= 284+64+20 and mx <= 284+64+64+20:
+						if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
+							oboard.add_counter(player_symbol,1,2)
+							
+					
+					if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
+						if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
+							oboard.add_counter(player_symbol,2,2)
+							
+
+				if turn == 1:
+					if mx >= 284 and mx <= 284+64:
+						if my >= 80 and my <= 80+64:
+							oboard.add_counter(player_symbol,0,0)
+							
+					
+					if mx >= 284+64+20 and mx <= 284+64+64+20:
+						if my >= 80 and my <= 80+64:
+							oboard.add_counter(player_symbol,1,0)
+							
+					
+					if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
+						if my >= 80 and my <= 80+64:
+							oboard.add_counter(player_symbol,2,0)
+							
+					# Second Row
+					if mx >= 284 and mx <= 284+64:
+						if my >= 80+64+20 and my <= 80+64+64+20:
+							oboard.add_counter(player_symbol,0,1)
+							
+					
+					if mx >= 284+64+20 and mx <= 284+64+64+20:
+						if my >= 80+64+20 and my <= 80+64+64+20:
+							oboard.add_counter(player_symbol,1,1)
+							
+					
+					if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
+						if my >= 80+64+20 and my <= 80+64+64+20:
+							oboard.add_counter(player_symbol,2,1)
+							
+					# Third Row
+					if mx >= 284 and mx <= 284+64:
+						if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
+							oboard.add_counter(player_symbol,0,2)
+							
+					
+					if mx >= 284+64+20 and mx <= 284+64+64+20:
+						if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
+							oboard.add_counter(player_symbol,1,2)
+							
+					
+					if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
+						if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
+							oboard.add_counter(player_symbol,2,2)
+							
+
 		pygame.display.flip()
 
 def gameScreenAi():
