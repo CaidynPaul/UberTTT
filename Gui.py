@@ -53,7 +53,7 @@ def gameScreenPlayer():
 		board = oboard.get_board()
 		SCREEN.fill(('#1a1a1a'))
 		display_board(board)
-		print(turn)
+		print(board)
 		for e in pygame.event.get():
 			if e.type == pygame.QUIT:
 				running = False
