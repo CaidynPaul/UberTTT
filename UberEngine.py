@@ -87,41 +87,41 @@ class Player:#holds the player symbol only
 
 
 
-#concept driver code
-player1=Player('o','player1')
-player2=Player('x','player2')
-game=Board()
-turnDict = {0:"o",1:"x"}
+# #concept driver code
+# player1=Player('o','player1')
+# player2=Player('x','player2')
+# game=Board()
+# turnDict = {0:"o",1:"x"}
 
 
-while True:
-	turn=0
-	game.display_board()
-	print('Player 1 where would you like to go?')
-	place=int(input('---->'))
-	game.add_counter(turnDict[turn],game.convert_to_index(place)[1],game.convert_to_index(place)[0])
-	if game.check_for_win(turnDict[turn]):
-		game.win(turnDict[turn])
-		game.display_board()
+# while True:
+# 	turn=0
+# 	game.display_board()
+# 	print('Player 1 where would you like to go?')
+# 	place=int(input('---->'))
+# 	game.add_counter(turnDict[turn],game.convert_to_index(place)[1],game.convert_to_index(place)[0])
+# 	if game.check_for_win(turnDict[turn]):
+# 		game.win(turnDict[turn])
+# 		game.display_board()
 
-	if game.check_for_draw():
-		print('DRAW')
-		game.display_board()
-		quit()
+# 	if game.check_for_draw():
+# 		print('DRAW')
+# 		game.display_board()
+# 		quit()
 
-	turn=1
-	game.display_board()
-	print('Player 2 where would you like to go?')
-	place=int(input('---->'))
-	game.add_counter(turnDict[turn],game.convert_to_index(place)[1],game.convert_to_index(place)[0])
-	game.check_for_win(turnDict[turn])
-	if game.check_for_win(turnDict[turn]):
-		game.win(turnDict[turn])
-		game.display_board()
-	if game.check_for_draw():
-		print('DRAW')
-		game.display_board()
-		quit()
+# 	turn=1
+# 	game.display_board()
+# 	print('Player 2 where would you like to go?')
+# 	place=int(input('---->'))
+# 	game.add_counter(turnDict[turn],game.convert_to_index(place)[1],game.convert_to_index(place)[0])
+# 	game.check_for_win(turnDict[turn])
+# 	if game.check_for_win(turnDict[turn]):
+# 		game.win(turnDict[turn])
+# 		game.display_board()
+# 	if game.check_for_draw():
+# 		print('DRAW')
+# 		game.display_board()
+# 		quit()
 		
 
-	#123547698
+# 	#123547698
