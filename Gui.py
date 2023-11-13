@@ -43,11 +43,7 @@ def gameScreenPlayer():
 		pygame.draw.line(SCREEN,('#e4e4e4'),(260,150+10+64+10),(530,150+10+64+10)) # Horizontal
 
 	running = True
-	turn = 0
-	turnDict = {
-		0:"o",
-		1:"x"
-	}
+	
 	while running:
 		
 		board = oboard.get_board()
@@ -58,102 +54,65 @@ def gameScreenPlayer():
 			if e.type == pygame.QUIT:
 				running = False
 			
-			if e.type == pygame.MOUSEBUTTONDOWN:
-				
-				turn = 1 - turn
+			if e.type == pygame.MOUSEBUTTONDOWN:		
 				
 				mx,my = pygame.mouse.get_pos()
-				player_symbol = turnDict[turn]
-				if turn == 0:
-					if mx >= 284 and mx <= 284+64:
-						if my >= 80 and my <= 80+64:
-							oboard.add_counter(player_symbol,0,0)
-							
-					if mx >= 284+64+20 and mx <= 284+64+64+20:
-						if my >= 80 and my <= 80+64:
-							oboard.add_counter(player_symbol,1,0)
-							
-					
-					if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
-						if my >= 80 and my <= 80+64:
-							oboard.add_counter(player_symbol,2,0)
-							
-					# Second Row
-					if mx >= 284 and mx <= 284+64:
-						if my >= 80+64+20 and my <= 80+64+64+20:
-							oboard.add_counter(player_symbol,0,1)
-							
-					
-					if mx >= 284+64+20 and mx <= 284+64+64+20:
-						if my >= 80+64+20 and my <= 80+64+64+20:
-							oboard.add_counter(player_symbol,1,1)
-							
-					
-					if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
-						if my >= 80+64+20 and my <= 80+64+64+20:
-							oboard.add_counter(player_symbol,2,1)
-							
-					# Third Row
-					if mx >= 284 and mx <= 284+64:
-						if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
-							oboard.add_counter(player_symbol,0,2)
-							
-					
-					if mx >= 284+64+20 and mx <= 284+64+64+20:
-						if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
-							oboard.add_counter(player_symbol,1,2)
-							
-					
-					if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
-						if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
-							oboard.add_counter(player_symbol,2,2)
-							
 
-				if turn == 1:
-					if mx >= 284 and mx <= 284+64:
-						if my >= 80 and my <= 80+64:
-							oboard.add_counter(player_symbol,0,0)
-							
+				if mx >= 284 and mx <= 284+64:
+					if my >= 80 and my <= 80+64:
+						oboard.add_counter(0,0)
+										
+				if mx >= 284+64+20 and mx <= 284+64+64+20:
+					if my >= 80 and my <= 80+64:
+						oboard.add_counter(1,0)
+						
+				
+				if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
+					if my >= 80 and my <= 80+64:
+						oboard.add_counter(2,0)
+						
+				# Second Row
+				if mx >= 284 and mx <= 284+64:
+					if my >= 80+64+20 and my <= 80+64+64+20:
+						oboard.add_counter(0,1)
+						
+				
+				if mx >= 284+64+20 and mx <= 284+64+64+20:
+					if my >= 80+64+20 and my <= 80+64+64+20:
+						oboard.add_counter(1,1)
+						
+				
+				if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
+					if my >= 80+64+20 and my <= 80+64+64+20:
+						oboard.add_counter(2,1)
+						
+				# Third Row
+				if mx >= 284 and mx <= 284+64:
+					if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
+						oboard.add_counter(0,2)
+						
+				
+				if mx >= 284+64+20 and mx <= 284+64+64+20:
+					if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
+						oboard.add_counter(1,2)
+						
+				
+				if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
+					if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
+						oboard.add_counter(2,2)
 					
-					if mx >= 284+64+20 and mx <= 284+64+64+20:
-						if my >= 80 and my <= 80+64:
-							oboard.add_counter(player_symbol,1,0)
-							
-					
-					if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
-						if my >= 80 and my <= 80+64:
-							oboard.add_counter(player_symbol,2,0)
-							
-					# Second Row
-					if mx >= 284 and mx <= 284+64:
-						if my >= 80+64+20 and my <= 80+64+64+20:
-							oboard.add_counter(player_symbol,0,1)
-							
-					
-					if mx >= 284+64+20 and mx <= 284+64+64+20:
-						if my >= 80+64+20 and my <= 80+64+64+20:
-							oboard.add_counter(player_symbol,1,1)
-							
-					
-					if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
-						if my >= 80+64+20 and my <= 80+64+64+20:
-							oboard.add_counter(player_symbol,2,1)
-							
-					# Third Row
-					if mx >= 284 and mx <= 284+64:
-						if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
-							oboard.add_counter(player_symbol,0,2)
-							
-					
-					if mx >= 284+64+20 and mx <= 284+64+64+20:
-						if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
-							oboard.add_counter(player_symbol,1,2)
-							
-					
-					if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
-						if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
-							oboard.add_counter(player_symbol,2,2)
-							
+		if oboard.check_for_win('o'):
+			print("O has Won")
+			winScreen("Player 1")
+			quit()
+		if oboard.check_for_win('x'):
+			winScreen("Player 2")
+			quit()
+		
+		if oboard.check_for_draw():
+			print("DRAW")
+			drawScreen()
+			quit()
 
 		pygame.display.flip()
 
@@ -316,20 +275,17 @@ def titleScreen():
 		SCREEN.blit(play_text,[SCREEN_RECT.centerx-50,SCREEN_RECT.centery-130])
 		pygame.display.flip()
 
-def winScreen():
+def winScreen(winner=None):
 	SCREEN = pygame.display.set_mode((1280,720))
 	SCREEN_RECT = SCREEN.get_rect()
 
 	
 	win_background = pygame.image.load("win-Background.png")
 
-	def get_winner():
-		pass
 
 	font_size = 110
 	win_font = pygame.font.SysFont("Consolas",font_size)
 
-	winner = "Player 1"
 	win_text = win_font.render(winner,True,('#fcc603'))
 
 	home_image = pygame.image.load("Home.png")
@@ -341,6 +297,38 @@ def winScreen():
 		SCREEN.blit(win_background, SCREEN_RECT)
 		SCREEN.blit(win_text,(SCREEN_RECT.centerx-230,SCREEN_RECT.centery+160))
 		pygame.draw.rect(SCREEN,('#4b0ebe'),[SCREEN_RECT.width-64,SCREEN_RECT.height-64,64,64])
+		SCREEN.blit(home_image,(SCREEN_RECT.width-64,SCREEN_RECT.height-64))		
+		for e in pygame.event.get():
+			if e.type == pygame.QUIT:
+				running = False
+			
+			if e.type == pygame.MOUSEBUTTONUP:
+				mx,my = pygame.mouse.get_pos()
+
+				if mx in range(SCREEN_RECT.width-64,SCREEN_RECT.width) and my in range(SCREEN_RECT.height-64,SCREEN_RECT.height):
+					titleScreen()
+					exit()
+		
+		pygame.display.flip()
+
+def drawScreen(winner=None):
+	SCREEN = pygame.display.set_mode((1280,720))
+	SCREEN_RECT = SCREEN.get_rect()
+
+	
+	draw_background = pygame.image.load("Draw-Background.png")
+
+
+
+	home_image = pygame.image.load("Home.png")
+
+	pygame.display.set_caption("DRAW!")
+
+	running = True
+	while running:
+		SCREEN.blit(draw_background, SCREEN_RECT)
+		
+		pygame.draw.rect(SCREEN,('#303030'),[SCREEN_RECT.width-64,SCREEN_RECT.height-64,64,64])
 		SCREEN.blit(home_image,(SCREEN_RECT.width-64,SCREEN_RECT.height-64))		
 		for e in pygame.event.get():
 			if e.type == pygame.QUIT:

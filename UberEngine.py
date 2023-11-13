@@ -10,8 +10,19 @@ class Board:#board class
 		self.board_dict={1:[0,0],2:[0,1],3:[0,2],#board values as indexes
 						4:[1,0],5:[1,1],6:[1,2],#used in "convert_to_index"
 						7:[2,0],8:[2,1],9:[2,2]}#function
+		
+		self.turnDict = {
+			0:'o',
+			1:'x'
+		}
 		self.turns=0
 		self.winner=None
+
+	def set_winner(self, winner):
+		self.winner=winner
+	def get_winner(self):
+		return self.winner
+	
 	def get_board(self):
 		return self.board
 	
@@ -33,7 +44,8 @@ class Board:#board class
 		return self.board_dict[user_input]#uses numerical input representing board space and returns the index version
 										#gives in the form [y,x], due to array calling
 	
-	def add_counter(self,player_counter,xcoord,ycoord):#adds counter
+	def add_counter(self,xcoord,ycoord):#adds counter
+		player_counter = self.turnDict[self.turns]
 		if self.board[ycoord][xcoord] == ' ':#if spot is free
 			self.board[ycoord][xcoord]=player_counter
 			self.turns=1-self.turns
@@ -104,43 +116,43 @@ class Player:#holds the player symbol only
 		self.name=name#just for back end
 
 
-#concept driver code
-player1=Player('o','player1')
-player2=Player('x','player2')
-game=Board()
-turnDict = {0:"o",1:"x"}
+# #concept driver code
+# player1=Player('o','player1')
+# player2=Player('x','player2')
+# game=Board()
+# turnDict = {0:"o",1:"x"}
 
 
-while True:
-	turn=0
-	game.display_board()
-	print('Player 1 where would you like to go?')
-	place=int(input('---->'))
-	game.add_counter(turnDict[turn],game.convert_to_index(place)[1],game.convert_to_index(place)[0])
-	if game.check_for_win(turnDict[turn]):
-		game.win(turnDict[turn])
-		win_type=game.find_win(turnDict[turn])
-		game.display_board()
+# while True:
+# 	turn=0
+# 	game.display_board()
+# 	print('Player 1 where would you like to go?')
+# 	place=int(input('---->'))
+# 	game.add_counter(turnDict[turn],game.convert_to_index(place)[1],game.convert_to_index(place)[0])
+# 	if game.check_for_win(turnDict[turn]):
+# 		game.win(turnDict[turn])
+# 		win_type=game.find_win(turnDict[turn])
+# 		game.display_board()
 
-	if game.check_for_draw():
-		print('DRAW')
-		game.display_board()
-		quit()
+# 	if game.check_for_draw():
+# 		print('DRAW')
+# 		game.display_board()
+# 		quit()
 
-	turn=1
-	game.display_board()
-	print('Player 2 where would you like to go?')
-	place=int(input('---->'))
-	game.add_counter(turnDict[turn],game.convert_to_index(place)[1],game.convert_to_index(place)[0])
-	game.check_for_win(turnDict[turn])
-	if game.check_for_win(turnDict[turn]):
-		game.win(turnDict[turn])
-		win_type=game.find_win(turnDict[turn])
-		game.display_board()
-	if game.check_for_draw():
-		print('DRAW')
-		game.display_board()
-		quit()
+# 	turn=1
+# 	game.display_board()
+# 	print('Player 2 where would you like to go?')
+# 	place=int(input('---->'))
+# 	game.add_counter(turnDict[turn],game.convert_to_index(place)[1],game.convert_to_index(place)[0])
+# 	game.check_for_win(turnDict[turn])
+# 	if game.check_for_win(turnDict[turn]):
+# 		game.win(turnDict[turn])
+# 		win_type=game.find_win(turnDict[turn])
+# 		game.display_board()
+# 	if game.check_for_draw():
+# 		print('DRAW')
+# 		game.display_board()
+# 		quit()
 		
 
-	#123547698
+# 	#123547698
