@@ -3,7 +3,7 @@ A collaborative project of tictactoe
 
 ## Developers
 
-`Caidyn Paul` and `Yusuf Sajjad`
+`Yusuf Sajjad` and `co`
 
 # About
 
