@@ -44,32 +44,33 @@ class Board:#board class
 		return self.board_dict[user_input]#uses numerical input representing board space and returns the index version
 										#gives in the form [y,x], due to array calling
 	
-	def add_counter(self,xcoord,ycoord):#adds counter
+	def add_counter(self,xcoord,ycoord,update=False):#adds counter
 		player_counter = self.turnDict[self.turns]
 		if self.board[ycoord][xcoord] == ' ':#if spot is free
 			self.board[ycoord][xcoord]=player_counter
-			self.turns=1-self.turns
+			if update:
+				self.turns=1-self.turns
 		else:#
 			pass
 
 	
-	def check_for_win(self,counter):#counter being the symbol we are checking for
+	def check_for_win(self,counter,board=self.board):#counter being the symbol we are checking for
 		#just alot of if/elif statments to check all possible win conditions for a specific counter
-		if self.board[0][0]==counter and self.board[0][1]==counter and self.board[0][2]==counter:#horizontal
+		if board[0][0]==counter and board[0][1]==counter and board[0][2]==counter:#horizontal
 			return True
-		elif self.board[1][0]==counter and self.board[1][1]==counter and self.board[1][2]==counter:#horizontal
+		elif board[1][0]==counter and board[1][1]==counter and board[1][2]==counter:#horizontal
 			return True
-		elif self.board[2][0]==counter and self.board[2][1]==counter and self.board[2][2]==counter:#horizontal
+		elif board[2][0]==counter and board[2][1]==counter and board[2][2]==counter:#horizontal
 			return True	
-		elif self.board[0][0]==counter and self.board[1][1]==counter and self.board[2][2]==counter:#diagonal
+		elif board[0][0]==counter and board[1][1]==counter and board[2][2]==counter:#diagonal
 			return True
-		elif self.board[0][2]==counter and self.board[1][1]==counter and self.board[2][0]==counter:#diagonal
+		elif board[0][2]==counter and board[1][1]==counter and board[2][0]==counter:#diagonal
 			return True	
-		elif self.board[0][0]==counter and self.board[1][0]==counter and self.board[2][0]==counter:#vertical
+		elif board[0][0]==counter and board[1][0]==counter and board[2][0]==counter:#vertical
 			return True
-		elif self.board[0][1]==counter and self.board[1][1]==counter and self.board[2][1]==counter:#vertical
+		elif board[0][1]==counter and board[1][1]==counter and board[2][1]==counter:#vertical
 			return True	
-		elif self.board[0][2]==counter and self.board[1][2]==counter and self.board[2][2]==counter:#vertical
+		elif board[0][2]==counter and board[1][2]==counter and board[2][2]==counter:#vertical
 			return True
 
 	def find_win(self,counter):#counter being the symbol we are checking for.!!!!!isntaed of check_for_win we return the win type
@@ -91,9 +92,9 @@ class Board:#board class
 		elif self.board[0][2]==counter and self.board[1][2]==counter and self.board[2][2]==counter:#vertical
 			return 'v3'
 	
-	def check_for_draw(self):
+	def check_for_draw(self,board=self.board):
 		num_of_spaces_taken=0
-		for i in self.board:
+		for i in board:
 			for j in i:
 				if j==' ':
 					num_of_spaces_taken+=1
