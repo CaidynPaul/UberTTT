@@ -1,6 +1,9 @@
 #counter and symbol have been used interchangably in the comments
 
 
+#counter and symbol have been used interchangably in the comments
+
+
 
 class Board:#board class
 	def __init__(self):
@@ -44,7 +47,7 @@ class Board:#board class
 		return self.board_dict[user_input]#uses numerical input representing board space and returns the index version
 										#gives in the form [y,x], due to array calling
 	
-	def add_counter(self,xcoord,ycoord,update=False):#adds counter
+	def add_counter(self,xcoord,ycoord,update):#adds counter
 		player_counter = self.turnDict[self.turns]
 		if self.board[ycoord][xcoord] == ' ':#if spot is free
 			self.board[ycoord][xcoord]=player_counter
@@ -54,7 +57,7 @@ class Board:#board class
 			pass
 
 	
-	def check_for_win(self,counter,board=self.board):#counter being the symbol we are checking for
+	def check_for_win(self,counter,board):#counter being the symbol we are checking for
 		#just alot of if/elif statments to check all possible win conditions for a specific counter
 		if board[0][0]==counter and board[0][1]==counter and board[0][2]==counter:#horizontal
 			return True
@@ -92,7 +95,7 @@ class Board:#board class
 		elif self.board[0][2]==counter and self.board[1][2]==counter and self.board[2][2]==counter:#vertical
 			return 'v3'
 	
-	def check_for_draw(self,board=self.board):
+	def check_for_draw(self,board):
 		num_of_spaces_taken=0
 		for i in board:
 			for j in i:
@@ -127,15 +130,18 @@ turnDict = {0:"o",1:"x"}
 while True:
 	turn=0
 	game.display_board()
+	1
+	
 	print('Player 1 where would you like to go?')
 	place=int(input('---->'))
-	game.add_counter(turnDict[turn],game.convert_to_index(place)[1],game.convert_to_index(place)[0])
-	if game.check_for_win(turnDict[turn]):
+	
+	game.add_counter(game.convert_to_index(place)[1],game.convert_to_index(place)[0],True)
+	if game.check_for_win(turnDict[turn],game.board):
 		game.win(turnDict[turn])
 		win_type=game.find_win(turnDict[turn])
 		game.display_board()
 
-	if game.check_for_draw():
+	if game.check_for_draw(game.board):
 		print('DRAW')
 		game.display_board()
 		quit()
@@ -144,16 +150,19 @@ while True:
 	game.display_board()
 	print('Player 2 where would you like to go?')
 	place=int(input('---->'))
-	game.add_counter(turnDict[turn],game.convert_to_index(place)[1],game.convert_to_index(place)[0])
-	game.check_for_win(turnDict[turn])
-	if game.check_for_win(turnDict[turn]):
+	game.add_counter(game.convert_to_index(place)[1],game.convert_to_index(place)[0],True)
+	game.check_for_win(turnDict[turn],game.board)
+	if game.check_for_win(turnDict[turn],game.board):
 		game.win(turnDict[turn])
 		win_type=game.find_win(turnDict[turn])
 		game.display_board()
-	if game.check_for_draw():
+	if game.check_for_draw(game.board):
 		print('DRAW')
 		game.display_board()
 		quit()
+		
+
+# 	#123547698
 		
 
 # 	#123547698
