@@ -101,15 +101,15 @@ def gameScreenPlayer():
 					if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
 						oboard.add_counter(2,2)
 					
-		if oboard.check_for_win('o'):
+		if oboard.check_for_win('o',oboard.get_board()):
 			print("O has Won")
 			winScreen("Player 1")
 			quit()
-		if oboard.check_for_win('x'):
+		if oboard.check_for_win('x',oboard.get_board()):
 			winScreen("Player 2")
 			quit()
 		
-		if oboard.check_for_draw():
+		if oboard.check_for_draw(oboard.get_board()):
 			print("DRAW")
 			drawScreen()
 			quit()
@@ -237,10 +237,10 @@ def titleChoice():
 						gameScreenAi()
 						exit()
 				
-		pygame.draw.rect(SCREEN,('#772C1F'),[SCREEN_RECT.centerx-(256//2),SCREEN_RECT.centery-128,256,80])
+		pygame.draw.rect(SCREEN,('#858585'),[SCREEN_RECT.centerx-(256//2),SCREEN_RECT.centery-128,256,80],border_radius = 8)
 		SCREEN.blit(player_choice_text,[SCREEN_RECT.centerx-110,SCREEN_RECT.centery-130+20])
 
-		pygame.draw.rect(SCREEN,('#772C1F'),[SCREEN_RECT.centerx-(256//2),SCREEN_RECT.centery-128+100,256,80])
+		pygame.draw.rect(SCREEN,('#7d7d7d'),[SCREEN_RECT.centerx-(256//2),SCREEN_RECT.centery-128+100,256,80],border_radius = 10)
 		SCREEN.blit(ai_choice_text,[SCREEN_RECT.centerx-55,SCREEN_RECT.centery-130+120])
 		pygame.display.flip()
 
@@ -271,7 +271,7 @@ def titleScreen():
 						titleChoice()
 						exit()
 				
-		pygame.draw.rect(SCREEN,('#772C1F'),[SCREEN_RECT.centerx-(256//2),SCREEN_RECT.centery-128,256,80])
+		pygame.draw.rect(SCREEN,('#858585'),[SCREEN_RECT.centerx-(256//2),SCREEN_RECT.centery-128,256,80],border_radius = 7)
 		SCREEN.blit(play_text,[SCREEN_RECT.centerx-50,SCREEN_RECT.centery-130])
 		pygame.display.flip()
 
