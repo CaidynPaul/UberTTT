@@ -2,6 +2,10 @@ import pygame
 import UberEngine as Engine
 
 pygame.init()
+
+icon = pygame.image.load("AppIcon.png")
+pygame.display.set_icon(icon)
+
 Clock = pygame.time.Clock()
 def gameScreenPlayer():
 	SCREEN = pygame.display.set_mode((800,800))
@@ -221,6 +225,8 @@ def titleChoice():
 	ai_choice_text = font.render("Play An AI",True,('#ffffff'))
 	
 	background_image = pygame.image.load("Title-Background.png")
+	background_image = pygame.transform.scale(background_image,(1280,720))
+
 
 	while running:
 		SCREEN.blit(background_image,SCREEN_RECT)
@@ -240,10 +246,10 @@ def titleChoice():
 						gameScreenAi()
 						exit()
 				
-		pygame.draw.rect(SCREEN,('#858585'),[SCREEN_RECT.centerx-(256//2),SCREEN_RECT.centery-128,256,80],border_radius = 8)
+		pygame.draw.rect(SCREEN,('#421200'),[SCREEN_RECT.centerx-(256//2),SCREEN_RECT.centery-128,256,80],border_radius = 8)
 		SCREEN.blit(player_choice_text,[SCREEN_RECT.centerx-110,SCREEN_RECT.centery-130+20])
 
-		pygame.draw.rect(SCREEN,('#7d7d7d'),[SCREEN_RECT.centerx-(256//2),SCREEN_RECT.centery-128+100,256,80],border_radius = 10)
+		pygame.draw.rect(SCREEN,('#421200'),[SCREEN_RECT.centerx-(256//2),SCREEN_RECT.centery-128+100,256,80],border_radius = 10)
 		SCREEN.blit(ai_choice_text,[SCREEN_RECT.centerx-55,SCREEN_RECT.centery-130+120])
 		pygame.display.flip()
 
@@ -260,6 +266,7 @@ def titleScreen():
 	play_text = play_font.render("Play",True,('#ffffff'))
 	
 	background_image = pygame.image.load("Title-Background.png")
+	background_image = pygame.transform.scale(background_image,(1280,720))
 
 	while running:
 		SCREEN.blit(background_image,SCREEN_RECT)
@@ -274,7 +281,7 @@ def titleScreen():
 						titleChoice()
 						exit()
 				
-		pygame.draw.rect(SCREEN,('#858585'),[SCREEN_RECT.centerx-(256//2),SCREEN_RECT.centery-128,256,80],border_radius = 7)
+		pygame.draw.rect(SCREEN,('#421200'),[SCREEN_RECT.centerx-(256//2),SCREEN_RECT.centery-128,256,80],border_radius = 7)
 		SCREEN.blit(play_text,[SCREEN_RECT.centerx-50,SCREEN_RECT.centery-130])
 		pygame.display.flip()
 
@@ -349,6 +356,8 @@ def drawScreen(winner=None):
 def introScreen():
 	SCREEN = pygame.display.set_mode((1280, 720))
 	SCREEN_RECT = SCREEN.get_rect()
+
+	pygame.display.set_caption("UberSuper TicTacToe")
 
 	running = True
 	animation_complete = False  # New variable to track animation completion
