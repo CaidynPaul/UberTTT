@@ -2,6 +2,7 @@ import pygame
 import UberEngine as Engine
 
 pygame.init()
+Clock = pygame.time.Clock()
 def gameScreenPlayer():
 	SCREEN = pygame.display.set_mode((800,800))
 	SCREEN_RECT  = SCREEN.get_rect()
@@ -24,23 +25,28 @@ def gameScreenPlayer():
 	offsety = SCREEN_RECT.centery-300-margin
 
 	oboard = Engine.Board()	
-
+	
 	def display_board(board):
 		for i in range(len(board)):
 			for q in range(len(board[i])):
-				if board[i][q] == "x":					
+				if board[i][q] == "x":
+									
 					SCREEN.blit(iX,(iXRect.x+(64+margin)*q+offsetx,iXRect.y+(64+margin)*i+offsety))
 					
-				if board[i][q] == "o":					
+				if board[i][q] == "o":
+							
 					SCREEN.blit(iO,(iORect.x+(64+margin)*q+offsetx,iORect.y+(64+margin)*i+offsety))
 					
 				if board[i][q] == " ":
+					# pygame.draw.rect(SCREEN,(255,0,255),[iXRect.x+(64+margin)*q+offsetx,iXRect.y+(64+margin)*i+offsety,64,64])
 					pass
 		# Draw guide lines for the board
-		pygame.draw.line(SCREEN,('#e4e4e4'),(360,80),(360,315)) # Verticle
-		pygame.draw.line(SCREEN,('#e4e4e4'),(360+10+64+10,80),(360+10+64+10,315)) #Verticle
-		pygame.draw.line(SCREEN,('#e4e4e4'),(270,150),(530,150)) # Horizontal
-		pygame.draw.line(SCREEN,('#e4e4e4'),(260,150+10+64+10),(530,150+10+64+10)) # Horizontal
+		line_width = 3
+		pygame.draw.line(SCREEN,('#e4e4e4'),(358,80),(358,315),line_width) # Verticle
+		pygame.draw.line(SCREEN,('#e4e4e4'),(358+10+64+10,80),(358+10+64+10,315),line_width) #Verticle
+		pygame.draw.line(SCREEN,('#e4e4e4'),(270,153),(530,153),line_width) # Horizontal
+		pygame.draw.line(SCREEN,('#e4e4e4'),(270,153+10+64+10),(530,153+10+64+10),line_width) # Horizontal
+	
 
 	running = True
 	
@@ -102,10 +108,10 @@ def gameScreenPlayer():
 						oboard.add_counter(2,2)
 					
 		if oboard.check_for_win('o',oboard.get_board()):
-			print("O has Won")
+			print("O has Won")				
 			winScreen("Player 1")
 			quit()
-		if oboard.check_for_win('x',oboard.get_board()):
+		if oboard.check_for_win('x',oboard.get_board()):			
 			winScreen("Player 2")
 			quit()
 		
@@ -342,6 +348,7 @@ def drawScreen(winner=None):
 					exit()
 		
 		pygame.display.flip()
+	
 
 if __name__ == '__main__':
 	titleScreen()
