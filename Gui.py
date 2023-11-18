@@ -55,7 +55,6 @@ def gameScreenPlayer():
 		board = oboard.get_board()
 		SCREEN.fill(('#1a1a1a'))
 		display_board(board)
-		print(board)
 		for e in pygame.event.get():
 			if e.type == pygame.QUIT:
 				running = False
@@ -108,7 +107,6 @@ def gameScreenPlayer():
 						oboard.add_counter(2,2)
 					
 		if oboard.check_for_win('o',oboard.get_board()):
-			print("O has Won")				
 			winScreen("Player 1")
 			quit()
 		if oboard.check_for_win('x',oboard.get_board()):			
@@ -116,7 +114,6 @@ def gameScreenPlayer():
 			quit()
 		
 		if oboard.check_for_draw(oboard.get_board()):
-			print("DRAW")
 			drawScreen()
 			quit()
 
@@ -348,8 +345,60 @@ def drawScreen(winner=None):
 					exit()
 		
 		pygame.display.flip()
-	
+
+def introScreen():
+	SCREEN = pygame.display.set_mode((1280, 720))
+	SCREEN_RECT = SCREEN.get_rect()
+
+	running = True
+	animation_complete = False  # New variable to track animation completion
+
+	font_title = pygame.font.SysFont("Calibri", 200)
+	font_subtitle = pygame.font.SysFont("Calibri", 50)
+
+	color1 = pygame.Color('#000000')
+	color2 = pygame.Color('#CFB53B')
+
+	text_title = font_title.render("Tic Tac Toe", True, color1)
+	text_subtitle = font_subtitle.render("Made by: Caidyn Paul & Yusuf Sajjad", True, color2)
+
+	transition_duration = 5000  # in milliseconds
+	start_time = pygame.time.get_ticks()
+
+	while running:
+		elapsed_time = pygame.time.get_ticks() - start_time
+
+		if elapsed_time < transition_duration:
+			# Calculate the intermediate color
+			progress = elapsed_time / transition_duration
+			intermediate_color = pygame.Color(
+				int(color1.r + progress * (color2.r - color1.r)),
+				int(color1.g + progress * (color2.g - color1.g)),
+				int(color1.b + progress * (color2.b - color1.b))
+			)
+			text_title = font_title.render("Tic Tac Toe", True, intermediate_color)
+		else:
+			animation_complete = True  # Set animation completion status
+
+		SCREEN.blit(text_title, (SCREEN_RECT.centerx - (text_title.get_width() / 2), SCREEN_RECT.centery - 80))
+
+		if animation_complete:
+			# Display the subtitle after the animation is complete
+			SCREEN.blit(text_subtitle, (SCREEN_RECT.centerx - (text_subtitle.get_width() / 2), SCREEN_RECT.centery + 100))
+
+		for e in pygame.event.get():
+			if e.type == pygame.QUIT:
+				running = False
+
+		pygame.display.flip()
+
+		if animation_complete:
+			# Perform actions after the animation is complete
+			# For now, we'll just exit the loop after the animation
+			pygame.time.wait(3000)
+
+			titleScreen()
+			quit()
 
 if __name__ == '__main__':
-	titleScreen()
-
+	introScreen()
