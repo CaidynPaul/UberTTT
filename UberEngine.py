@@ -47,13 +47,11 @@ class Board:#board class
 		return self.board_dict[user_input]#uses numerical input representing board space and returns the index version
 										#gives in the form [y,x], due to array calling
 	
-	def add_counter(self,xcoord,ycoord,update=True):#adds counter
+	def add_counter(self,xcoord,ycoord):#adds counter
 		player_counter = self.turnDict[self.turns]
 		if self.board[ycoord][xcoord] == ' ':#if spot is free
 			self.board[ycoord][xcoord]=player_counter
-			if update:
-				self.turns=1-self.turns
-		else:#
+		else:
 			pass
 
 	
@@ -76,25 +74,7 @@ class Board:#board class
 		elif board[0][2]==counter and board[1][2]==counter and board[2][2]==counter:#vertical
 			return True
 
-	def find_win(self,counter):#counter being the symbol we are checking for.!!!!!isntaed of check_for_win we return the win type
-		#just alot of if/elif statments to check all possible win conditions for a specific counter
-		if self.board[0][0]==counter and self.board[0][1]==counter and self.board[0][2]==counter:#horizontal
-			return 'h1'
-		elif self.board[1][0]==counter and self.board[1][1]==counter and self.board[1][2]==counter:#horizontal
-			return 'h2'
-		elif self.board[2][0]==counter and self.board[2][1]==counter and self.board[2][2]==counter:#horizontal
-			return 'h3'	
-		elif self.board[0][0]==counter and self.board[1][1]==counter and self.board[2][2]==counter:#diagonal
-			return 'nd'
-		elif self.board[0][2]==counter and self.board[1][1]==counter and self.board[2][0]==counter:#diagonal
-			return 'pd'	
-		elif self.board[0][0]==counter and self.board[1][0]==counter and self.board[2][0]==counter:#vertical
-			return 'v1'
-		elif self.board[0][1]==counter and self.board[1][1]==counter and self.board[2][1]==counter:#vertical
-			return 'v2'	
-		elif self.board[0][2]==counter and self.board[1][2]==counter and self.board[2][2]==counter:#vertical
-			return 'v3'
-	
+
 	def check_for_draw(self,board):
 		num_of_spaces_taken=0
 		for i in board:
@@ -104,65 +84,147 @@ class Board:#board class
 		if num_of_spaces_taken==0:
 			if not self.check_for_win('x',self.board) and not self.check_for_win('o',self.board):
 				return True
-				
-
-
+	
+	def computer_ai(self,board,comp_turn):#using the minimax algorythm
 		
+		
+		state=self.evaluate(board)
+		
+		if state==1:
+			return state
+		if state==-1:
+			return state
+		if self.check_for_draw(board):
+			return 0
+		
+		if comp_turn:
+			best=-2#basically neg infite
+			copy_of_board=board
+			for i in range(3):
+				for j in range(3):
+					if board[i][j]==' ':
+						
+						board[i][j]='o'
+						if comp_turn:
+							comp_turn=False
+						else:
+							comp_turn=True
+						best=max(best,self.computer_ai(board,comp_turn))
+						board[i][j]=' '#reset change
+			return best
+		else:#player/minimizers turn
+			best=2#basically infite
+			copy_of_board=board
+			for i in range(3):
+				for j in range(3):
+					if board[i][j]==' ':
+						
+						board[i][j]='x'
+						if comp_turn:
+							comp_turn=False
+						else:
+							comp_turn=True
+						best=min(best,self.computer_ai(board,comp_turn))
+						board[i][j]=' '#reset change
+			return best
 	
-	def computer_ai(self):#using the minimax algorythm
-		pass
-			
-	
+	def find_best_move(self,board):
+		bestmove=[None,None]
+		bestval=-2#starting point
 
+		for i in range(3):
+			for j in range(3):
+				if board[i][j]==' ':
+					board[i][j]='o'
+					move=self.computer_ai(board,False)#evaluates move
+					board[i][j]=' '#reset changes
+
+					if bestval<move:
+						bestmove=[i,j]
+						bestval=move
+		
+		return bestmove#i y
+				#j x
+						
+
+
+
+
+
+
+
+	def evaluate(self,board):#ai function
+		if self.check_for_win('x',board):
+			return -1#comp loss
+		elif self.check_for_win('o',board):
+			return 1#comp win
+		return 0#if draw or on winner
+	
 class Player:#holds the player symbol only
 	def __init__(self,symbol,name):
 		self.symbol=symbol
 		self.name=name#just for back end
 
 
-# #concept driver code
-player1=Player('o','player1')
-player2=Player('x','player2')
-game=Board()
-turnDict = {0:"o",1:"x"}
+# # #concept driver code
+# player1=Player('o','player1')
+# player2=Player('x','player2')
+# computer=True
+# game=Board()
+# turnDict= {0:'o',1:'x'}
+# while True:
+# 	turn=0
 
+# 	game.display_board()
 
-# ~ while True:
-	# ~ turn=0
-	# ~ game.display_board()
-	# ~ 1
+# 	print('Player 1 where would you like to go?')
+# 	place=int(input('---->'))
+# 	game.add_counter(game.convert_to_index(place)[1],game.convert_to_index(place)[0])
+
+# 	if game.check_for_win(turnDict[turn],game.board):
+# 		game.win(turnDict[turn])
+# 		game.display_board()
 	
-	# ~ print('Player 1 where would you like to go?')
-	# ~ place=int(input('---->'))
+# 	if game.check_for_draw(game.board):
+# 		print('DRAW')
+# 		game.display_board()
+# 		quit()		
+
+
+
+# 	turn=1
+
+# 	game.display_board()
+
+# 	if computer:
+# 		place=game.find_best_move(game.board)
+		
+# 		game.add_counter(place[1],place[0])
 	
-	# ~ game.add_counter(game.convert_to_index(place)[1],game.convert_to_index(place)[0],True)
-	# ~ if game.check_for_win(turnDict[turn],game.board):
-		# ~ game.win(turnDict[turn])
-		# ~ win_type=game.find_win(turnDict[turn])
-		# ~ game.display_board()
+# 		if game.check_for_win(turnDict[turn],game.board):
+# 			game.win(turnDict[turn])
+# 			game.display_board()
 
-	# ~ if game.check_for_draw(game.board):
-		# ~ print('DRAW')
-		# ~ game.display_board()
-		# ~ quit()
+# 		if game.check_for_draw(game.board):
+# 			print('DRAW')
+# 			game.display_board()
+# 			quit()
 
-	# ~ turn=1
-	# ~ game.display_board()
-	# ~ print('Player 2 where would you like to go?')
-	# ~ place=int(input('---->'))
-	# ~ game.add_counter(game.convert_to_index(place)[1],game.convert_to_index(place)[0],True)
-	# ~ game.check_for_win(turnDict[turn],game.board)
-	# ~ if game.check_for_win(turnDict[turn],game.board):
-		# ~ game.win(turnDict[turn])
-		# ~ win_type=game.find_win(turnDict[turn])
-		# ~ game.display_board()
-	# ~ if game.check_for_draw(game.board):
-		# ~ print('DRAW')
-		# ~ game.display_board()
-		# ~ quit()
+
+# 	else:
+# 		print('Player 2 where would you like to go?')
+# 		place=int(input('---->'))
+
+# 		game.add_counter(game.convert_to_index(place)[1],game.convert_to_index(place)[0])
+
+	
+# 		if game.check_for_win(turnDict[turn],game.board):
+# 			game.win(turnDict[turn])
+# 			game.display_board()
+
+# 		if game.check_for_draw(game.board):
+# 			print('DRAW')
+# 			game.display_board()
+# 			quit()
 		
-
-# 	#123547698
-		
-
-# 	#123547698
+# # 	#123547698
