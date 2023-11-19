@@ -1,7 +1,8 @@
-import pygame
+import pygame, pygame.mixer
 import UberEngine as Engine
 
 pygame.init()
+pygame.mixer.init()
 
 icon = pygame.image.load("AppIcon.png")
 pygame.display.set_icon(icon)
@@ -51,7 +52,11 @@ def gameScreenPlayer():
 		pygame.draw.line(SCREEN,('#e4e4e4'),(270,153),(530,153),line_width) # Horizontal
 		pygame.draw.line(SCREEN,('#e4e4e4'),(270,153+10+64+10),(530,153+10+64+10),line_width) # Horizontal
 	
+	click_effect = pygame.mixer.Sound("click_effect.mp3")
+	effect_channel = pygame.mixer.Channel(0)
+	effect_channel.set_volume(1)
 
+	
 	running = True
 	
 	while running:
@@ -70,45 +75,54 @@ def gameScreenPlayer():
 				if mx >= 284 and mx <= 284+64:
 					if my >= 80 and my <= 80+64:
 						oboard.add_counter(0,0)
+						effect_channel.play(click_effect)
 										
 				if mx >= 284+64+20 and mx <= 284+64+64+20:
 					if my >= 80 and my <= 80+64:
 						oboard.add_counter(1,0)
+						effect_channel.play(click_effect)
 						
 				
 				if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
 					if my >= 80 and my <= 80+64:
 						oboard.add_counter(2,0)
+						effect_channel.play(click_effect)
 						
 				# Second Row
 				if mx >= 284 and mx <= 284+64:
 					if my >= 80+64+20 and my <= 80+64+64+20:
 						oboard.add_counter(0,1)
+						effect_channel.play(click_effect)
 						
 				
 				if mx >= 284+64+20 and mx <= 284+64+64+20:
 					if my >= 80+64+20 and my <= 80+64+64+20:
 						oboard.add_counter(1,1)
+						effect_channel.play(click_effect)
 						
 				
 				if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
 					if my >= 80+64+20 and my <= 80+64+64+20:
 						oboard.add_counter(2,1)
+						effect_channel.play(click_effect)
 						
 				# Third Row
 				if mx >= 284 and mx <= 284+64:
 					if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
 						oboard.add_counter(0,2)
+						effect_channel.play(click_effect)
 						
 				
 				if mx >= 284+64+20 and mx <= 284+64+64+20:
 					if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
 						oboard.add_counter(1,2)
+						effect_channel.play(click_effect)
 						
 				
 				if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
 					if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
 						oboard.add_counter(2,2)
+						effect_channel.play(click_effect)
 					
 		if oboard.check_for_win('o',oboard.get_board()):
 			winScreen("Player 1")
@@ -211,7 +225,6 @@ def gameScreenAi():
 				
 		pygame.display.flip()
 
-
 def titleChoice():
 	SCREEN = pygame.display.set_mode((1280,720))
 	SCREEN_RECT = SCREEN.get_rect()
@@ -252,7 +265,6 @@ def titleChoice():
 		pygame.draw.rect(SCREEN,('#421200'),[SCREEN_RECT.centerx-(256//2),SCREEN_RECT.centery-128+100,256,80],border_radius = 10)
 		SCREEN.blit(ai_choice_text,[SCREEN_RECT.centerx-55,SCREEN_RECT.centery-130+120])
 		pygame.display.flip()
-
 
 def titleScreen():
 	SCREEN = pygame.display.set_mode((1280,720))
@@ -302,7 +314,12 @@ def winScreen(winner=None):
 
 	pygame.display.set_caption(f"Winner : {winner}")
 
+	win_effect = pygame.mixer.Sound("win_effect.mp3")
+	Effects_Channel = pygame.mixer.Channel(0)
+
+	Effects_Channel.play(win_effect)
 	running = True
+
 	while running:
 		SCREEN.blit(win_background, SCREEN_RECT)
 		SCREEN.blit(win_text,(SCREEN_RECT.centerx-230,SCREEN_RECT.centery+160))
@@ -316,6 +333,7 @@ def winScreen(winner=None):
 				mx,my = pygame.mouse.get_pos()
 
 				if mx in range(SCREEN_RECT.width-64,SCREEN_RECT.width) and my in range(SCREEN_RECT.height-64,SCREEN_RECT.height):
+					Effects_Channel.stop()
 					titleScreen()
 					exit()
 		
@@ -333,6 +351,10 @@ def drawScreen(winner=None):
 	home_image = pygame.image.load("Home.png")
 
 	pygame.display.set_caption("DRAW!")
+	draw_effect = pygame.mixer.Sound("draw_effect.mp3")
+	Effects_Channel = pygame.mixer.Channel(0)
+
+	Effects_Channel.play(draw_effect)
 
 	running = True
 	while running:
@@ -348,6 +370,7 @@ def drawScreen(winner=None):
 				mx,my = pygame.mouse.get_pos()
 
 				if mx in range(SCREEN_RECT.width-64,SCREEN_RECT.width) and my in range(SCREEN_RECT.height-64,SCREEN_RECT.height):
+					Effects_Channel.stop()
 					titleScreen()
 					exit()
 		
@@ -374,6 +397,10 @@ def introScreen():
 	transition_duration = 5000  # in milliseconds
 	start_time = pygame.time.get_ticks()
 
+	POP_effect = pygame.mixer.Sound("intro_effect.mp3")
+	Effects_Channel = pygame.mixer.Channel(0)
+	Effects_Channel.set_volume(1)
+
 	while running:
 		elapsed_time = pygame.time.get_ticks() - start_time
 
@@ -393,7 +420,9 @@ def introScreen():
 
 		if animation_complete:
 			# Display the subtitle after the animation is complete
+			Effects_Channel.play(POP_effect)
 			SCREEN.blit(text_subtitle, (SCREEN_RECT.centerx - (text_subtitle.get_width() / 2), SCREEN_RECT.centery + 100))
+
 
 		for e in pygame.event.get():
 			if e.type == pygame.QUIT:
