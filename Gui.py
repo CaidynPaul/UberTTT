@@ -9,19 +9,19 @@ pygame.display.set_icon(icon)
 
 Clock = pygame.time.Clock()
 def gameScreenPlayer():
-	SCREEN = pygame.display.set_mode((800,800))
-	SCREEN_RECT  = SCREEN.get_rect()
+	SCREEN = pygame.display.set_mode((800,800)) # Set SCREEN SIZE and Surface
+	SCREEN_RECT  = SCREEN.get_rect() # Get the Screen's Positional Values
 
-	Title = "Playing against another player"
+	Title = "Playing against another player" # Set the title of the window
 	pygame.display.set_caption(Title)
 
-	iX = pygame.image.load("X.png")
+	iX = pygame.image.load("X.png") # load the X and O images
 	iO = pygame.image.load("O.png")
 
-	iX = pygame.transform.scale(iX,(64,64))
+	iX = pygame.transform.scale(iX,(64,64)) # and make sure they are the correct scale
 	iO = pygame.transform.scale(iO,(64,64))
 
-	iXRect = iX.get_rect()
+	iXRect = iX.get_rect() # get thier positional values
 	iORect = iO.get_rect()
 
 	margin = 20
@@ -29,9 +29,9 @@ def gameScreenPlayer():
 	offsetx = SCREEN_RECT.centerx-96-margin
 	offsety = SCREEN_RECT.centery-300-margin
 
-	oboard = Engine.Board()	
+	oboard = Engine.Board()	# Get the board Object
 	
-	def display_board(board):
+	def display_board(board): # Function to display the board to the screen
 		for i in range(len(board)):
 			for q in range(len(board[i])):
 				if board[i][q] == "x":
@@ -47,32 +47,34 @@ def gameScreenPlayer():
 					pass
 		# Draw guide lines for the board
 		line_width = 3
+
+		# Draw the guide lines
 		pygame.draw.line(SCREEN,('#e4e4e4'),(358,80),(358,315),line_width) # Verticle
 		pygame.draw.line(SCREEN,('#e4e4e4'),(358+10+64+10,80),(358+10+64+10,315),line_width) #Verticle
 		pygame.draw.line(SCREEN,('#e4e4e4'),(270,153),(530,153),line_width) # Horizontal
 		pygame.draw.line(SCREEN,('#e4e4e4'),(270,153+10+64+10),(530,153+10+64+10),line_width) # Horizontal
 	
-	click_effect = pygame.mixer.Sound("click_effect.mp3")
-	effect_channel = pygame.mixer.Channel(0)
-	effect_channel.set_volume(1)
+	click_effect = pygame.mixer.Sound("click_effect.mp3") # load the click sound effect
+	effect_channel = pygame.mixer.Channel(0) # define the audio channel
+	effect_channel.set_volume(1) # set the volume to max
 
 	
 	running = True
 	
-	while running:
+	while running:# Game loop
 		
-		board = oboard.get_board()
-		SCREEN.fill(('#1a1a1a'))
-		display_board(board)
+		board = oboard.get_board() #get the board (2d array)
+		SCREEN.fill(('#1a1a1a')) # fill the board with a solid colour (dark Gray)
+		display_board(board)# display the board
 		for e in pygame.event.get():
 			if e.type == pygame.QUIT:
 				running = False
 			
-			if e.type == pygame.MOUSEBUTTONDOWN:		
+			if e.type == pygame.MOUSEBUTTONDOWN: # get mouse input
 				
-				mx,my = pygame.mouse.get_pos()
+				mx,my = pygame.mouse.get_pos() # get mouse position
 
-				if mx >= 284 and mx <= 284+64:
+				if mx >= 284 and mx <= 284+64: # add a counter to the position where the mouse was clicked
 					if my >= 80 and my <= 80+64:
 						oboard.add_counter(0,0)
 						effect_channel.play(click_effect)
@@ -124,20 +126,20 @@ def gameScreenPlayer():
 						oboard.add_counter(2,2)
 						effect_channel.play(click_effect)
 					
-		if oboard.check_for_win('o',oboard.get_board()):
+		if oboard.check_for_win('o',oboard.get_board()): # Check win for Player1
 			winScreen("Player 1")
 			quit()
-		if oboard.check_for_win('x',oboard.get_board()):			
+		if oboard.check_for_win('x',oboard.get_board()): # Check win for Player2
 			winScreen("Player 2")
 			quit()
 		
-		if oboard.check_for_draw(oboard.get_board()):
+		if oboard.check_for_draw(oboard.get_board()): # Check for draw
 			drawScreen()
 			quit()
 
-		pygame.display.flip()
+		pygame.display.flip() # Update the display
 
-def gameScreenAi():
+def gameScreenAi(): # Game Screen for PVE
 	SCREEN = pygame.display.set_mode((800,800))
 	SCREEN_RECT  = SCREEN.get_rect()
 
@@ -225,7 +227,7 @@ def gameScreenAi():
 				
 		pygame.display.flip()
 
-def titleChoice():
+def titleChoice(): # SCREEN to choose whether to play verus AI or Human
 	SCREEN = pygame.display.set_mode((1280,720))
 	SCREEN_RECT = SCREEN.get_rect()
 
@@ -266,7 +268,7 @@ def titleChoice():
 		SCREEN.blit(ai_choice_text,[SCREEN_RECT.centerx-55,SCREEN_RECT.centery-130+120])
 		pygame.display.flip()
 
-def titleScreen():
+def titleScreen(): # Title Screen
 	SCREEN = pygame.display.set_mode((1280,720))
 	SCREEN_RECT = SCREEN.get_rect()
 	
@@ -297,7 +299,7 @@ def titleScreen():
 		SCREEN.blit(play_text,[SCREEN_RECT.centerx-50,SCREEN_RECT.centery-130])
 		pygame.display.flip()
 
-def winScreen(winner=None):
+def winScreen(winner=None): # Win Screen takes in a winner argument as a string
 	SCREEN = pygame.display.set_mode((1280,720))
 	SCREEN_RECT = SCREEN.get_rect()
 
@@ -339,7 +341,7 @@ def winScreen(winner=None):
 		
 		pygame.display.flip()
 
-def drawScreen(winner=None):
+def drawScreen(): # Draw Screen
 	SCREEN = pygame.display.set_mode((1280,720))
 	SCREEN_RECT = SCREEN.get_rect()
 
@@ -376,7 +378,7 @@ def drawScreen(winner=None):
 		
 		pygame.display.flip()
 
-def introScreen():
+def introScreen(): # Intro Screen with Tic Tac Toe reveal animation
 	SCREEN = pygame.display.set_mode((1280, 720))
 	SCREEN_RECT = SCREEN.get_rect()
 
@@ -438,5 +440,5 @@ def introScreen():
 			titleScreen()
 			quit()
 
-if __name__ == '__main__':
+if __name__ == '__main__': # automatically run the app when the file is opened
 	introScreen()
