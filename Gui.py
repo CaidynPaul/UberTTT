@@ -160,7 +160,7 @@ def gameScreenAi(): # Game Screen for PVE
 	offsetx = SCREEN_RECT.centerx-96-margin
 	offsety = SCREEN_RECT.centery-300-margin
 
-	board = [[' ',' ',' '],[' ',' ',' '],[' ',' ',' ']]
+	oboard = Engine.Board()
 
 	def display_board(board):
 		for i in range(len(board)):
@@ -180,6 +180,7 @@ def gameScreenAi(): # Game Screen for PVE
 	running = True
 
 	while running:
+		board = oboard.get_board()
 		SCREEN.fill(('#1a1a1a'))
 		display_board(board)
 		for e in pygame.event.get():
