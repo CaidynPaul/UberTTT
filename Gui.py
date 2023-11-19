@@ -179,6 +179,10 @@ def gameScreenAi(): # Game Screen for PVE
 
 	running = True
 
+	click_effect = pygame.mixer.Sound("click_effect.mp3") # load the click sound effect
+	effect_channel = pygame.mixer.Channel(0) # define the audio channel
+	effect_channel.set_volume(1) # set the volume to max
+
 	while running:
 		board = oboard.get_board()
 		SCREEN.fill(('#1a1a1a'))
@@ -186,45 +190,67 @@ def gameScreenAi(): # Game Screen for PVE
 		for e in pygame.event.get():
 			if e.type == pygame.QUIT:
 				running = False
+			
+			if e.type == pygame.MOUSEBUTTONDOWN: # get mouse input
+				
+				mx,my = pygame.mouse.get_pos() # get mouse position
+				
+				if oboard.get_turn() == 'x':
+					if mx >= 284 and mx <= 284+64: # add a counter to the position where the mouse was clicked
+						if my >= 80 and my <= 80+64:
+							oboard.add_counter(0,0)
+							effect_channel.play(click_effect)
+											
+					if mx >= 284+64+20 and mx <= 284+64+64+20:
+						if my >= 80 and my <= 80+64:
+							oboard.add_counter(1,0)
+							effect_channel.play(click_effect)
+							
+					
+					if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
+						if my >= 80 and my <= 80+64:
+							oboard.add_counter(2,0)
+							effect_channel.play(click_effect)
+							
+					# Second Row
+					if mx >= 284 and mx <= 284+64:
+						if my >= 80+64+20 and my <= 80+64+64+20:
+							oboard.add_counter(0,1)
+							effect_channel.play(click_effect)
+							
+					
+					if mx >= 284+64+20 and mx <= 284+64+64+20:
+						if my >= 80+64+20 and my <= 80+64+64+20:
+							oboard.add_counter(1,1)
+							effect_channel.play(click_effect)
+							
+					
+					if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
+						if my >= 80+64+20 and my <= 80+64+64+20:
+							oboard.add_counter(2,1)
+							effect_channel.play(click_effect)
+							
+					# Third Row
+					if mx >= 284 and mx <= 284+64:
+						if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
+							oboard.add_counter(0,2)
+							effect_channel.play(click_effect)
+							
+					
+					if mx >= 284+64+20 and mx <= 284+64+64+20:
+						if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
+							oboard.add_counter(1,2)
+							effect_channel.play(click_effect)
+							
+					
+					if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
+						if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
+							oboard.add_counter(2,2)
+							effect_channel.play(click_effect)
 
-			if e.type == pygame.MOUSEBUTTONDOWN:
-				mx,my = pygame.mouse.get_pos()
-				# First Row
-				if mx >= 284 and mx <= 284+64:
-					if my >= 80 and my <= 80+64:
-						print("1")
-				
-				if mx >= 284+64+20 and mx <= 284+64+64+20:
-					if my >= 80 and my <= 80+64:
-						print("2")
-				
-				if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
-					if my >= 80 and my <= 80+64:
-						print("3")
-				# Second Row
-				if mx >= 284 and mx <= 284+64:
-					if my >= 80+64+20 and my <= 80+64+64+20:
-						print("4")
-				
-				if mx >= 284+64+20 and mx <= 284+64+64+20:
-					if my >= 80+64+20 and my <= 80+64+64+20:
-						print("5")
-				
-				if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
-					if my >= 80+64+20 and my <= 80+64+64+20:
-						print("6")
-				# Third Row
-				if mx >= 284 and mx <= 284+64:
-					if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
-						print("7")
-				
-				if mx >= 284+64+20 and mx <= 284+64+64+20:
-					if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
-						print("8")
-				
-				if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
-					if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
-						print("9")
+				elif oboard.get_turn() == 'o':
+					oboard.add_counter(oboard.find_best_move(oboard.get_board)[0],oboard.find_best_move(oboard.get_board)[1])
+					effect_channel.play(click_effect)
 				
 		pygame.display.flip()
 

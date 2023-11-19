@@ -42,6 +42,9 @@ class Board:#board class
 		self.winner=winner
 		quit()
 	
+	def get_turn(self):
+		return self.turnDict[self.turns]
+	
 		
 	def convert_to_index(self,user_input):#might be backend or may be kept
 		return self.board_dict[user_input]#uses numerical input representing board space and returns the index version
@@ -147,7 +150,7 @@ class Board:#board class
 				#j x
 						
 
-
+# oboard.add_counter(oboard.find_best_move(oboard.get_board)[0],oboard.find_best_move(oboard.get_board)[1])
 
 
 
