@@ -112,7 +112,7 @@ class Board:#board class
 							comp_turn=False
 						else:
 							comp_turn=True
-						best=max(best,self.computer_ai(board,comp_turn))
+						best=max([best,self.computer_ai(board,comp_turn)])
 						board[i][j]=' '#reset change
 			return best
 		else:#player/minimizers turn
@@ -124,7 +124,7 @@ class Board:#board class
 						
 						board[i][j]='x'
 
-						best=min(best,self.computer_ai(board,not comp_turn))
+						best=min(best,self.computer_ai([board,not comp_turn)])
 						board[i][j]=' '#reset change
 			return best
 	
