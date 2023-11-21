@@ -56,6 +56,8 @@ class Board:#board class
 			self.board[ycoord][xcoord]=player_counter
 		else:
 			pass
+			
+		self.turns = 1 - self.turns
 
 	
 	def check_for_win(self,counter,board):#counter being the symbol we are checking for
@@ -121,27 +123,28 @@ class Board:#board class
 						
 						board[i][j]='x'
 
-						best=min(best,self.computer_ai([board,not comp_turn)])
+						best=min(best,self.computer_ai(board,not comp_turn))
 						board[i][j]=' '#reset change
 			return best
 	
-	def find_best_move(self,board):
-		bestmove=[None,None]
-		bestval=-2#starting point
+	def find_best_move(self, board):
+		bestmove = [None, None]
+		bestval = -2  # starting point
 
 		for i in range(3):
 			for j in range(3):
-				if board[i][j]==' ':
-					board[i][j]='o'
-					move=self.computer_ai(board,False)#evaluates move
-					board[i][j]=' '#reset changes
+				if board[i][j] == ' ':
+					board[i][j] = 'o'
+					move = self.computer_ai(board, False)  # evaluates move
+					board[i][j] = ' '  # reset changes
 
-					if bestval<move:
-						bestmove=[i,j]
-						bestval=move
-		
-		return bestmove#i y
-				#j x
+					if bestval < move:
+						bestmove = [i, j]
+						bestval = move
+
+		print(bestmove)
+		return bestmove  # i y, j x
+
 						
 
 # oboard.add_counter(oboard.find_best_move(oboard.get_board)[0],oboard.find_best_move(oboard.get_board)[1])

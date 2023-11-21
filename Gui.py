@@ -249,7 +249,7 @@ def gameScreenAi(): # Game Screen for PVE
 							effect_channel.play(click_effect)
 
 				elif oboard.get_turn() == 'o':
-					oboard.add_counter(oboard.find_best_move(oboard.get_board)[0],oboard.find_best_move(oboard.get_board)[1])
+					oboard.add_counter(oboard.find_best_move(oboard.get_board()[1]),oboard.find_best_move(oboard.get_board()[0]))
 					effect_channel.play(click_effect)
 				
 		pygame.display.flip()
@@ -281,12 +281,12 @@ def titleChoice(): # SCREEN to choose whether to play verus AI or Human
 				if mx >= SCREEN_RECT.centerx-(256//2) and mx <= SCREEN_RECT.centerx-(256//2)+256:
 					if my >= SCREEN_RECT.centery-128 and my <= SCREEN_RECT.centery-128+80:
 						gameScreenPlayer()
-						exit()
+						quit()
 					
 				if mx >= SCREEN_RECT.centerx-(256//2) and mx <= SCREEN_RECT.centerx-(256//2)+256:
 					if my >= SCREEN_RECT.centery-128+100 and my <= SCREEN_RECT.centery-128+100+256:
 						gameScreenAi()
-						exit()
+						quit()
 				
 		pygame.draw.rect(SCREEN,('#421200'),[SCREEN_RECT.centerx-(256//2),SCREEN_RECT.centery-128,256,80],border_radius = 8)
 		SCREEN.blit(player_choice_text,[SCREEN_RECT.centerx-110,SCREEN_RECT.centery-130+20])
