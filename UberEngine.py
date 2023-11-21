@@ -139,10 +139,7 @@ class Board:#board class
 	def random_move(self):
 		starters=[1,3,7,9]
 		return random.choice(starters)
-						
-
-# oboard.add_counter(oboard.find_best_move(oboard.get_board)[0],oboard.find_best_move(oboard.get_board)[1])
-
+			
 
 	def evaluate(self,board):#ai function
 		if self.check_for_win('x',board):
@@ -151,39 +148,3 @@ class Board:#board class
 			return 1#comp win
 		return 0#if draw or on winner
 	
-class Player:#holds the player symbol only
-	def __init__(self,symbol,name):
-		self.symbol=symbol
-		self.name=name#just for back end
-
-
-# # #concept driver code
-# player1=Player('o','computer')
-# player2=Player('x','player2')
-# computer=True
-# game=Board()
-# turnDict= {0:'o',1:'x'}
-
-# while True:
-#     game.display_board()
-#     place = game.find_best_move(game.board)
-#     game.add_counter(place[1], place[0])
-#     if game.check_for_win('o', game.board):
-#         game.display_board()
-#         quit()
-#     if game.check_for_draw(game.board):
-#         print('draw')
-#         game.display_board()
-#         quit()
-
-#     game.display_board()
-#     place = int(input('->'))
-#     place = game.convert_to_index(place)
-#     game.add_counter(place[1], place[0])
-#     if game.check_for_win('x', game.board):  # Check for 'x' win
-#         game.display_board()
-#         quit()
-#     if game.check_for_draw(game.board):
-#         print('draw')
-#         game.display_board()
-#         quit()
