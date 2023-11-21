@@ -248,9 +248,24 @@ def gameScreenAi(): # Game Screen for PVE
 							oboard.add_counter(2,2)
 							effect_channel.play(click_effect)
 
-				elif oboard.get_turn() == 'o':
-					oboard.add_counter(oboard.find_best_move(oboard.get_board()[1]),oboard.find_best_move(oboard.get_board()[0]))
-					effect_channel.play(click_effect)
+			if oboard.get_turn() == 'o':
+
+				best_move = oboard.find_best_move(oboard.get_board())
+				oboard.add_counter(best_move[1],best_move[0])
+				effect_channel.play(click_effect)
+			
+			
+			if oboard.check_for_win('o',oboard.get_board()): # Check win for Player1
+				winScreen("Player 1")
+				quit()
+			if oboard.check_for_win('x',oboard.get_board()): # Check win for Player2
+				winScreen("Player 2")
+				quit()
+			
+			if oboard.check_for_draw(oboard.get_board()): # Check for draw
+				drawScreen()
+				quit()
+			
 				
 		pygame.display.flip()
 
