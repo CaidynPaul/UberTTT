@@ -3,7 +3,7 @@
 
 #counter and symbol have been used interchangably in the comments
 
-
+import random
 
 class Board:#board class
 	def __init__(self):
@@ -56,8 +56,7 @@ class Board:#board class
 			self.board[ycoord][xcoord]=player_counter
 		else:
 			pass
-			
-		self.turns = 1 - self.turns
+		self.turns=1-self.turns
 
 	
 	def check_for_win(self,counter,board):#counter being the symbol we are checking for
@@ -90,44 +89,37 @@ class Board:#board class
 			if not self.check_for_win('x',self.board) and not self.check_for_win('o',self.board):
 				return True
 	
-	def computer_ai(self,board,comp_turn):#using the minimax algorythm
-		
-		
-		state=self.evaluate(board)
-		
-		if state==1:
+	def computer_ai(self, board, comp_turn):
+		state = self.evaluate(board)
+
+		if state == 1:
 			return state
-		if state==-1:
+		if state == -1:
 			return state
 		if self.check_for_draw(board):
 			return 0
-		
+
 		if comp_turn:
-			best=-2#basically neg infite
-			copy_of_board=board
+			best = -2000  # basically neg infite
 			for i in range(3):
 				for j in range(3):
-					if board[i][j]==' ':
-						
-						board[i][j]='o'
-
-						best=max([best,self.computer_ai(board,not comp_turn)])
-						board[i][j]=' '#reset change
+					if board[i][j] == ' ':
+						board[i][j] = 'o'
+						best = max([best, self.computer_ai([row[:] for row in board], not comp_turn)])
+						board[i][j] = ' '  # reset change
 			return best
-		else:#player/minimizers turn
-			best=2#basically infite
-			copy_of_board=board
+		else:  # player/minimizer's turn
+			best = 2000  # basically infite
 			for i in range(3):
 				for j in range(3):
-					if board[i][j]==' ':
-						
-						board[i][j]='x'
-
-						best=min(best,self.computer_ai(board,not comp_turn))
-						board[i][j]=' '#reset change
+					if board[i][j] == ' ':
+						board[i][j] = 'x'
+						best = min(best, self.computer_ai([row[:] for row in board], not comp_turn))
+						board[i][j] = ' '  # reset change
 			return best
 	
 	def find_best_move(self, board):
+
 		bestmove = [None, None]
 		bestval = -2  # starting point
 
@@ -137,20 +129,19 @@ class Board:#board class
 					board[i][j] = 'o'
 					move = self.computer_ai(board, False)  # evaluates move
 					board[i][j] = ' '  # reset changes
-
 					if bestval < move:
 						bestmove = [i, j]
 						bestval = move
 
-		print(bestmove)
-		return bestmove  # i y, j x
-
+		return bestmove  # i y
+		
+	
+	def random_move(self):
+		starters=[1,3,7,9]
+		return random.choice(starters)
 						
 
 # oboard.add_counter(oboard.find_best_move(oboard.get_board)[0],oboard.find_best_move(oboard.get_board)[1])
-
-
-
 
 
 	def evaluate(self,board):#ai function
@@ -167,64 +158,32 @@ class Player:#holds the player symbol only
 
 
 # # #concept driver code
-# player1=Player('o','player1')
+# player1=Player('o','computer')
 # player2=Player('x','player2')
 # computer=True
 # game=Board()
 # turnDict= {0:'o',1:'x'}
+
 # while True:
-# 	turn=0
+#     game.display_board()
+#     place = game.find_best_move(game.board)
+#     game.add_counter(place[1], place[0])
+#     if game.check_for_win('o', game.board):
+#         game.display_board()
+#         quit()
+#     if game.check_for_draw(game.board):
+#         print('draw')
+#         game.display_board()
+#         quit()
 
-# 	game.display_board()
-
-# 	print('Player 1 where would you like to go?')
-# 	place=int(input('---->'))
-# 	game.add_counter(game.convert_to_index(place)[1],game.convert_to_index(place)[0])
-
-# 	if game.check_for_win(turnDict[turn],game.board):
-# 		game.win(turnDict[turn])
-# 		game.display_board()
-	
-# 	if game.check_for_draw(game.board):
-# 		print('DRAW')
-# 		game.display_board()
-# 		quit()		
-
-
-
-# 	turn=1
-
-# 	game.display_board()
-
-# 	if computer:
-# 		place=game.find_best_move(game.board)
-		
-# 		game.add_counter(place[1],place[0])
-	
-# 		if game.check_for_win(turnDict[turn],game.board):
-# 			game.win(turnDict[turn])
-# 			game.display_board()
-
-# 		if game.check_for_draw(game.board):
-# 			print('DRAW')
-# 			game.display_board()
-# 			quit()
-
-
-# 	else:
-# 		print('Player 2 where would you like to go?')
-# 		place=int(input('---->'))
-
-# 		game.add_counter(game.convert_to_index(place)[1],game.convert_to_index(place)[0])
-
-	
-# 		if game.check_for_win(turnDict[turn],game.board):
-# 			game.win(turnDict[turn])
-# 			game.display_board()
-
-# 		if game.check_for_draw(game.board):
-# 			print('DRAW')
-# 			game.display_board()
-# 			quit()
-		
-# # 	#123547698
+#     game.display_board()
+#     place = int(input('->'))
+#     place = game.convert_to_index(place)
+#     game.add_counter(place[1], place[0])
+#     if game.check_for_win('x', game.board):  # Check for 'x' win
+#         game.display_board()
+#         quit()
+#     if game.check_for_draw(game.board):
+#         print('draw')
+#         game.display_board()
+#         quit()
