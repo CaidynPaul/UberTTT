@@ -90,10 +90,7 @@ class Board:#board class
 				return True
 	
 	def computer_ai(self,board,comp_turn):#using the minimax algorythm
-		
-		
 		state=self.evaluate(board)
-		
 		if state==1:
 			return state
 		if state==-1:
@@ -102,18 +99,19 @@ class Board:#board class
 			return 0
 		
 		if comp_turn:
-			best=-2000#basically neg infite
+			best=-2000#basically neg infity
 			for i in range(3):
 				for j in range(3):
-					if board[i][j]==' ':
+					if board[i][j]==' ':#lool=ks at all blank spaces
 						
-						board[i][j]='o'
+						board[i][j]='o'#adds the maximizers symbol
 
-						best=max([best,self.computer_ai(board,not comp_turn)])
-						board[i][j]=' '#reset change
+						#reccurivly call minimax on the new board
+						best=max([best,self.computer_ai(board,not comp_turn)])#compares the scores to see of this new score is better than the old
+						board[i][j]=' '#reset changes so that the game can continue normally
 			return best
 		else:#player/minimizers turn
-			best=2000#basically infite
+			best=2000#basically infity
 			copy_of_board=board
 			for i in range(3):
 				for j in range(3):
@@ -125,31 +123,20 @@ class Board:#board class
 						board[i][j]=' '#reset change
 			return best
 	
-	def find_best_move(self, board):
-
-		bestmove = [None, None]
-		bestval = -2  # starting point
-
+	def find_best_move(self,board):
+		bestmove=[None,None]
+		bestval=-2#starting point
 		for i in range(3):
 			for j in range(3):
-				if board[i][j] == ' ':
-					board[i][j] = 'o'
-					move = self.computer_ai(board, False)  # evaluates move
-					board[i][j] = ' '  # reset changes
+				if board[i][j]==' ':#looks through board, findiing possible moves and if they are the best making it the best move
+					board[i][j]='o'
+					move=self.computer_ai(board,False)#evaluates move and all branches after using minimax
+					board[i][j]= ' '#reset changes
 					if bestval < move:
-						bestmove = [i, j]
-						bestval = move
-
-		return bestmove  # i y
+						bestmove=[i,j]
+						bestval=move
+		return bestmove#[i,j]
 		
-	
-	def random_move(self):
-		starters=[1,3,7,9]
-		return random.choice(starters)
-						
-
-# oboard.add_counter(oboard.find_best_move(oboard.get_board)[0],oboard.find_best_move(oboard.get_board)[1])
-
 
 	def evaluate(self,board):#ai function
 		if self.check_for_win('x',board):
@@ -158,39 +145,3 @@ class Board:#board class
 			return 1#comp win
 		return 0#if draw or on winner
 	
-class Player:#holds the player symbol only
-	def __init__(self,symbol,name):
-		self.symbol=symbol
-		self.name=name#just for back end
-
-
-# # # #concept driver code
-# player1=Player('o','computer')
-# player2=Player('x','player2')
-# computer=True
-# game=Board()
-# turnDict= {0:'o',1:'x'}
-
-# while True:
-#     game.display_board()
-#     place = game.find_best_move(game.board)
-#     game.add_counter(place[1], place[0])
-#     if game.check_for_win('o', game.board):
-#         game.display_board()
-#         quit()
-#     if game.check_for_draw(game.board):
-#         print('draw')
-#         game.display_board()
-#         quit()
-
-#     game.display_board()
-#     place = int(input('->'))
-#     place = game.convert_to_index(place)
-#     game.add_counter(place[1], place[0])
-#     if game.check_for_win('x', game.board):  # Check for 'x' win
-#         game.display_board()
-#         quit()
-#     if game.check_for_draw(game.board):
-#         print('draw')
-#         game.display_board()
-#         quit()
