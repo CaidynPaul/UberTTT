@@ -127,10 +127,10 @@ def gameScreenPlayer():
 						effect_channel.play(click_effect)
 					
 		if oboard.check_for_win('o',oboard.get_board()): # Check win for Player1
-			winScreen("Player 1")
+			winScreen("Computer")
 			quit()
 		if oboard.check_for_win('x',oboard.get_board()): # Check win for Player2
-			winScreen("Player 2")
+			winScreen("Human")
 			quit()
 		
 		if oboard.check_for_draw(oboard.get_board()): # Check for draw
