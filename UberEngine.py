@@ -164,33 +164,33 @@ class Player:#holds the player symbol only
 		self.name=name#just for back end
 
 
-# # #concept driver code
-player1=Player('o','computer')
-player2=Player('x','player2')
-computer=True
-game=Board()
-turnDict= {0:'o',1:'x'}
+# # # #concept driver code
+# player1=Player('o','computer')
+# player2=Player('x','player2')
+# computer=True
+# game=Board()
+# turnDict= {0:'o',1:'x'}
 
-while True:
-    game.display_board()
-    place = game.find_best_move(game.board)
-    game.add_counter(place[1], place[0])
-    if game.check_for_win('o', game.board):
-        game.display_board()
-        quit()
-    if game.check_for_draw(game.board):
-        print('draw')
-        game.display_board()
-        quit()
+# while True:
+#     game.display_board()
+#     place = game.find_best_move(game.board)
+#     game.add_counter(place[1], place[0])
+#     if game.check_for_win('o', game.board):
+#         game.display_board()
+#         quit()
+#     if game.check_for_draw(game.board):
+#         print('draw')
+#         game.display_board()
+#         quit()
 
-    game.display_board()
-    place = int(input('->'))
-    place = game.convert_to_index(place)
-    game.add_counter(place[1], place[0])
-    if game.check_for_win('x', game.board):  # Check for 'x' win
-        game.display_board()
-        quit()
-    if game.check_for_draw(game.board):
-        print('draw')
-        game.display_board()
-        quit()
+#     game.display_board()
+#     place = int(input('->'))
+#     place = game.convert_to_index(place)
+#     game.add_counter(place[1], place[0])
+#     if game.check_for_win('x', game.board):  # Check for 'x' win
+#         game.display_board()
+#         quit()
+#     if game.check_for_draw(game.board):
+#         print('draw')
+#         game.display_board()
+#         quit()
