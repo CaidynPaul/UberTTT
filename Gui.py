@@ -1,5 +1,6 @@
 import pygame, pygame.mixer
 import UberEngine as Engine
+from random import choice
 
 pygame.init()
 pygame.mixer.init()
@@ -43,7 +44,6 @@ def gameScreenPlayer():
 					SCREEN.blit(iO,(iORect.x+(64+margin)*q+offsetx,iORect.y+(64+margin)*i+offsety))
 					
 				if board[i][q] == " ":
-					# pygame.draw.rect(SCREEN,(255,0,255),[iXRect.x+(64+margin)*q+offsetx,iXRect.y+(64+margin)*i+offsety,64,64])
 					pass
 		# Draw guide lines for the board
 		line_width = 3
@@ -54,7 +54,10 @@ def gameScreenPlayer():
 		pygame.draw.line(SCREEN,('#e4e4e4'),(270,153),(530,153),line_width) # Horizontal
 		pygame.draw.line(SCREEN,('#e4e4e4'),(270,153+10+64+10),(530,153+10+64+10),line_width) # Horizontal
 	
-	click_effect = pygame.mixer.Sound("click_effect.mp3") # load the click sound effect
+	click_effect_var1 = pygame.mixer.Sound("click_effect_var1.mp3") # load the click sound effect
+	click_effect_var2 = pygame.mixer.Sound("click_effect_var2.mp3")
+	click_effect_var3 = pygame.mixer.Sound("click_effect_var3.mp3")
+	click_effect_list = [click_effect_var1, click_effect_var2, click_effect_var3]
 	effect_channel = pygame.mixer.Channel(0) # define the audio channel
 	effect_channel.set_volume(1) # set the volume to max
 
@@ -77,53 +80,62 @@ def gameScreenPlayer():
 				if mx >= 284 and mx <= 284+64: # add a counter to the position where the mouse was clicked
 					if my >= 80 and my <= 80+64:
 						oboard.add_counter(0,0)
-						effect_channel.play(click_effect)
+						click_effect = choice(click_effect_list) # Randomize the click sound effect sound
+						effect_channel.play(click_effect) # Play the randomized sound effect
 										
 				if mx >= 284+64+20 and mx <= 284+64+64+20:
 					if my >= 80 and my <= 80+64:
 						oboard.add_counter(1,0)
+						click_effect = choice(click_effect_list)
 						effect_channel.play(click_effect)
 						
 				
 				if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
 					if my >= 80 and my <= 80+64:
 						oboard.add_counter(2,0)
+						click_effect = choice(click_effect_list)
 						effect_channel.play(click_effect)
 						
 				# Second Row
 				if mx >= 284 and mx <= 284+64:
 					if my >= 80+64+20 and my <= 80+64+64+20:
 						oboard.add_counter(0,1)
+						click_effect = choice(click_effect_list)
 						effect_channel.play(click_effect)
 						
 				
 				if mx >= 284+64+20 and mx <= 284+64+64+20:
 					if my >= 80+64+20 and my <= 80+64+64+20:
 						oboard.add_counter(1,1)
+						click_effect = choice(click_effect_list)
 						effect_channel.play(click_effect)
 						
 				
 				if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
 					if my >= 80+64+20 and my <= 80+64+64+20:
 						oboard.add_counter(2,1)
+						click_effect = choice(click_effect_list)
 						effect_channel.play(click_effect)
 						
 				# Third Row
 				if mx >= 284 and mx <= 284+64:
 					if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
 						oboard.add_counter(0,2)
+						click_effect = choice(click_effect_list)
 						effect_channel.play(click_effect)
 						
 				
 				if mx >= 284+64+20 and mx <= 284+64+64+20:
 					if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
 						oboard.add_counter(1,2)
+						click_effect = choice(click_effect_list)
 						effect_channel.play(click_effect)
 						
 				
 				if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
 					if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
 						oboard.add_counter(2,2)
+						click_effect = choice(click_effect_list)
 						effect_channel.play(click_effect)
 					
 		if oboard.check_for_win('o',oboard.get_board()): # Check win for Player1
@@ -179,7 +191,10 @@ def gameScreenAi(): # Game Screen for PVE
 
 	running = True
 
-	click_effect = pygame.mixer.Sound("click_effect.mp3") # load the click sound effect
+	click_effect_var1 = pygame.mixer.Sound("click_effect_var1.mp3") # load the click sound effect
+	click_effect_var2 = pygame.mixer.Sound("click_effect_var2.mp3")
+	click_effect_var3 = pygame.mixer.Sound("click_effect_var3.mp3")
+	click_effect_list = [click_effect_var1, click_effect_var2, click_effect_var3]
 	effect_channel = pygame.mixer.Channel(0) # define the audio channel
 	effect_channel.set_volume(1) # set the volume to max
 
@@ -199,59 +214,69 @@ def gameScreenAi(): # Game Screen for PVE
 					if mx >= 284 and mx <= 284+64: # add a counter to the position where the mouse was clicked
 						if my >= 80 and my <= 80+64:
 							oboard.add_counter(0,0)
+							click_effect = choice(click_effect_list)
 							effect_channel.play(click_effect)
 											
 					if mx >= 284+64+20 and mx <= 284+64+64+20:
 						if my >= 80 and my <= 80+64:
 							oboard.add_counter(1,0)
+							click_effect = choice(click_effect_list)
 							effect_channel.play(click_effect)
 							
 					
 					if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
 						if my >= 80 and my <= 80+64:
 							oboard.add_counter(2,0)
+							click_effect = choice(click_effect_list)
 							effect_channel.play(click_effect)
 							
 					# Second Row
 					if mx >= 284 and mx <= 284+64:
 						if my >= 80+64+20 and my <= 80+64+64+20:
 							oboard.add_counter(0,1)
+							click_effect = choice(click_effect_list)
 							effect_channel.play(click_effect)
 							
 					
 					if mx >= 284+64+20 and mx <= 284+64+64+20:
 						if my >= 80+64+20 and my <= 80+64+64+20:
 							oboard.add_counter(1,1)
+							click_effect = choice(click_effect_list)
 							effect_channel.play(click_effect)
 							
 					
 					if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
 						if my >= 80+64+20 and my <= 80+64+64+20:
 							oboard.add_counter(2,1)
+							click_effect = choice(click_effect_list)
 							effect_channel.play(click_effect)
 							
 					# Third Row
 					if mx >= 284 and mx <= 284+64:
 						if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
 							oboard.add_counter(0,2)
+							click_effect = choice(click_effect_list)
 							effect_channel.play(click_effect)
 							
 					
 					if mx >= 284+64+20 and mx <= 284+64+64+20:
 						if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
 							oboard.add_counter(1,2)
+							click_effect = choice(click_effect_list)
 							effect_channel.play(click_effect)
 							
 					
 					if mx >= 284+64+20+64+20 and mx <= 284+64+64+20+64+20:
 						if my >= 80+64+20+64+20 and my <= 80+64+64+20+64+20:
 							oboard.add_counter(2,2)
+							click_effect = choice(click_effect_list)
 							effect_channel.play(click_effect)
 
 			if oboard.get_turn() == 'o':
 
 				best_move = oboard.find_best_move(oboard.get_board())
 				oboard.add_counter(best_move[1],best_move[0])
+				click_effect = choice(click_effect_list)
 				effect_channel.play(click_effect)
 			
 			
@@ -280,13 +305,10 @@ def titleChoice(): # SCREEN to choose whether to play verus AI or Human
 	font = pygame.font.SysFont("Arial",32)
 	player_choice_text = font.render("Play another Player",True,('#ffffff'))
 	ai_choice_text = font.render("Play An AI",True,('#ffffff'))
-	
-	background_image = pygame.image.load("Title-Background.png")
-	background_image = pygame.transform.scale(background_image,(1280,720))
 
 
 	while running:
-		SCREEN.blit(background_image,SCREEN_RECT)
+		SCREEN.fill(('#1a1a1a'))
 		for e in pygame.event.get():
 			if e.type == pygame.QUIT:
 				running = False
@@ -303,10 +325,10 @@ def titleChoice(): # SCREEN to choose whether to play verus AI or Human
 						gameScreenAi()
 						quit()
 				
-		pygame.draw.rect(SCREEN,('#421200'),[SCREEN_RECT.centerx-(256//2),SCREEN_RECT.centery-128,256,80],border_radius = 8)
+		pygame.draw.rect(SCREEN,('#2c2c2c'),[SCREEN_RECT.centerx-(256//2),SCREEN_RECT.centery-128,256,80],border_radius = 8)
 		SCREEN.blit(player_choice_text,[SCREEN_RECT.centerx-110,SCREEN_RECT.centery-130+20])
 
-		pygame.draw.rect(SCREEN,('#421200'),[SCREEN_RECT.centerx-(256//2),SCREEN_RECT.centery-128+100,256,80],border_radius = 10)
+		pygame.draw.rect(SCREEN,('#2c2c2c'),[SCREEN_RECT.centerx-(256//2),SCREEN_RECT.centery-128+100,256,80],border_radius = 10)
 		SCREEN.blit(ai_choice_text,[SCREEN_RECT.centerx-55,SCREEN_RECT.centery-130+120])
 		pygame.display.flip()
 
@@ -321,11 +343,9 @@ def titleScreen(): # Title Screen
 	play_font = pygame.font.SysFont("Arial",64)
 	play_text = play_font.render("Play",True,('#ffffff'))
 	
-	background_image = pygame.image.load("Title-Background.png")
-	background_image = pygame.transform.scale(background_image,(1280,720))
 
 	while running:
-		SCREEN.blit(background_image,SCREEN_RECT)
+		SCREEN.fill(('#1a1a1a'))
 		for e in pygame.event.get():
 			if e.type == pygame.QUIT:
 				running = False
@@ -337,7 +357,7 @@ def titleScreen(): # Title Screen
 						titleChoice()
 						exit()
 				
-		pygame.draw.rect(SCREEN,('#421200'),[SCREEN_RECT.centerx-(256//2),SCREEN_RECT.centery-128,256,80],border_radius = 7)
+		pygame.draw.rect(SCREEN,('#2c2c2c'),[SCREEN_RECT.centerx-(256//2),SCREEN_RECT.centery-128,256,80],border_radius = 7)
 		SCREEN.blit(play_text,[SCREEN_RECT.centerx-50,SCREEN_RECT.centery-130])
 		pygame.display.flip()
 
